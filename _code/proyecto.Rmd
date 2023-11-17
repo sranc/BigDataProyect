@@ -1,31 +1,49 @@
 ---
-title: "Untitled"
+title: "Inversion publica 2006-2022"
+author: "Ada Milenka Cueto Callisaya - "
+date: "`r Sys.Date()`"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
+    theme:
+      version: 4
+      bootswatch: readable
+runtime: shiny
 ---
 
+```{r}
+    pacman::p_load(
+      dplyr,
+      DT
+    )
+```
+
+# sidebar {.sidebar}
+
+# Graficos
 ```{r setup, include=FALSE}
 library(flexdashboard)
 ```
-
-Column {data-width=650}
+Column {data-width=600}
 -----------------------------------------------------------------------
 
 ### Chart A
 
 ```{r}
-
+rate <- 60
+gauge(rate, min = 0, max = 100, symbol = '%', gaugeSectors(
+  success = c(80, 100), warning = c(40, 79), danger = c(0, 39)
+))
 ```
 
-Column {data-width=350}
+Column {data-width=350, .tabset}
 -----------------------------------------------------------------------
 
 ### Chart B
 
 ```{r}
-
+datatable(iris)
 ```
 
 ### Chart C
@@ -33,4 +51,7 @@ Column {data-width=350}
 ```{r}
 
 ```
+# Tablas
+
+# Informe
 
