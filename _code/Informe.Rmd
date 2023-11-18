@@ -1,0 +1,46 @@
+---
+title: "Trabajo de Investigación"
+subtitle: "Maestría en Ciencia de Datos"
+author: |
+  | Docente: 
+  | MSc. Alvaro Limber Chirino Gutierrez
+date: |
+  | Maestrantes: 
+  | - Ada Milenka Cuento Callisaya
+  | - Alexander Ernesto Sucre Casas
+  | 
+  | Noviembre, 2023
+output: pdf_document
+lang: es-ES
+toc: TRUE
+---
+
+\pagebreak
+# Introducción
+
+
+# Objetivos
+
+
+# Motivación
+
+# Marco teórico
+
+# Descripción de la base de datos
+
+# Metodología
+
+##    1. Indicadores y fichas de indicadores
+
+##    2. Tratamiento sobre la base de datos
+
+##    3. Visualización de la información
+
+##    4. Armado de la plataforma
+
+# Resultados y análisis
+
+# Conclusiones y recomendaciones
+
+# Referencias
+
