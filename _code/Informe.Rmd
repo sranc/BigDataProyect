@@ -19,24 +19,78 @@ toc: TRUE
 # Introducción
 La información estadística disponible
 Otro cambio en la web de github
-# Objetivos
+
+#   Objetivos
 
 
-# Motivación
+#   Motivación
 
-# Marco teórico
+#   Marco teórico
 
-# Descripción de la base de datos
+#   Descripción de la base de datos
 
 # Metodología
 
-##    1. Indicadores y fichas de indicadores
+## 1. Indicadores y fichas de indicadores
 
-##    2. Tratamiento sobre la base de datos
+>Primer formato de ficha sugerido
 
-##    3. Visualización de la información
+||Ficha de Indicador|||
+|-----|:-----:|-----|-----|
+||Presupuestado vs ejecutado|||
+|Proceso||Fecha||
+|Nombre||||
+|Tipo||||
+|Objetivo||||
+|Fórmula||||
+|Fuente de información||||
+|Unidad de medida||Periodo de medición|2006-2022|
 
-##    4. Armado de la plataforma
+
+
+||Ficha de Indicador|||
+|-----|:-----:|-----|-----|
+||Presupuesto por departamento|||
+|Proceso||Fecha||
+|Nombre||||
+|Tipo||||
+|Objetivo||||
+|Fórmula||||
+|Fuente de información||||
+|Unidad de medida||Periodo de medición|2006-2022|
+
+
+
+||Ficha de Indicador|||
+|-----|:-----:|-----|-----|
+||Ejecución por tipo de entidad|||
+|Proceso||Fecha||
+|Nombre||||
+|Tipo||||
+|Objetivo||||
+|Fórmula||||
+|Fuente de información||||
+|Unidad de medida||Periodo de medición|2006-2022|
+
+
+>Segundo formato sugerido
+
+|INDICADOR|EJECUCIÓN POR MUNICIPIO|
+|-----|-----|
+|Definición||
+|Interpretación||
+|Límite de cumplimiento||
+|Método de cálculo|Número de municipios/Total ejecución|
+|Fuente de cálculo|Base de datos Presupuestaria|
+|Periodicidad del reporte|Mensual|
+|Responsable|Funcionarios del MEFP|
+
+
+## 2. Tratamiento sobre la base de datos
+
+## 3. Visualización de la información
+
+## 4. Armado de la plataforma
 
 # Resultados y análisis
 
