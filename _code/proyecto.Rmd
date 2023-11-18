@@ -1,6 +1,6 @@
 ---
 title: "Inversion publica 2006-2022"
-author: "Ada Milenka Cueto Callisaya - "
+author: "Ada Cueto - Alexander  Sucre"
 date: "`r Sys.Date()`"
 output: 
   flexdashboard::flex_dashboard:
@@ -8,7 +8,7 @@ output:
     vertical_layout: fill
     theme:
       version: 4
-      bootswatch: readable
+      bootswatch: cosmo
 runtime: shiny
 ---
 
@@ -31,19 +31,16 @@ Column {data-width=600}
 ### Chart A
 
 ```{r}
-rate <- 60
-gauge(rate, min = 0, max = 100, symbol = '%', gaugeSectors(
-  success = c(80, 100), warning = c(40, 79), danger = c(0, 39)
-))
+
 ```
 
-Column {data-width=350, .tabset}
+Column {data-width=350}
 -----------------------------------------------------------------------
 
 ### Chart B
 
 ```{r}
-datatable(iris)
+
 ```
 
 ### Chart C
@@ -52,6 +49,9 @@ datatable(iris)
 
 ```
 # Tablas
+```{r}
+datatable(iris)
+```
 
 # Informe
 
