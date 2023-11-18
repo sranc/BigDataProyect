@@ -17,7 +17,7 @@ toc: TRUE
 
 \pagebreak
 # Introducción
-
+La información estadística disponible
 
 # Objetivos
 
