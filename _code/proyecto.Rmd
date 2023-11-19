@@ -9,14 +9,26 @@ output:
     theme:
       version: 4
       bootswatch: cosmo
-runtime: shiny
 ---
 
 ```{r}
-    pacman::p_load(
-      dplyr,
-      DT
-    )
+pacman::p_load(
+  tidyverse,
+  sparklyr,
+  readxl,
+  dplyr,
+  ggplot2,
+  GGally,
+  ggthemes,
+  plotly,
+  DataExplorer,
+  textshape,
+  reticulate,
+  tictoc,
+  parquetize,
+  knitr,
+  DT
+)
 ```
 
 # sidebar {.sidebar}
