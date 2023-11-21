@@ -1,18 +1,24 @@
 ---
 title: "Inversion publica 2006-2022"
-author: "Ada Cueto - Alexander  Sucre"
+author: "Ada Cueto - Alexander Sucre"
 date: "`r Sys.Date()`"
 output: 
   flexdashboard::flex_dashboard:
-    orientation: columns
+    orientation: rows
     vertical_layout: fill
+    source_code: embed
     theme:
       version: 4
-      bootswatch: cosmo
+      base_font:
+        google: Sen
+      code_font:
+        google: JetBrains Mono
+      bootswatch: darkly
 ---
 
-```{r}
+```{r setup, include=FALSE}
 pacman::p_load(
+  flexdashboard,
   tidyverse,
   sparklyr,
   readxl,
@@ -31,22 +37,73 @@ pacman::p_load(
 )
 ```
 
-# sidebar {.sidebar}
 
-# Graficos
-```{r setup, include=FALSE}
-library(flexdashboard)
+# Resumen 
+
+```{r}
 ```
-Column {data-width=600}
+
+Row
 -----------------------------------------------------------------------
 
-### Chart A
+### Cantidad de proyectos {.value-box}
+
+```{r}
+articles <- 25
+valueBox(articles, icon = "fa-pencil")
+```
+
+### Total presupuestado {.value-box}
+
+```{r}
+articles <- 25
+valueBox(articles, icon = "fa-pencil")
+```
+
+### Total en ejecucion {.value-box}
+
+```{r}
+articles <- 25
+valueBox(articles, icon = "fa-pencil")
+```
+
+### Total ejecutado {.value-box}
+
+```{r}
+articles <- 25
+valueBox(articles, icon = "fa-pencil")
+```
+
+### % en ejecucion 
+
+```{r}
+articles <- 25
+gauge(articles, min = 0, max = 100, symbol = "%",
+      gaugeSectors(
+        warning = c(0,articles)
+      ))
+```
+
+### % ejecutado 
+
+```{r}
+articles <- 66
+gauge(articles, min = 0, max = 100, symbol = "%",
+      gaugeSectors(
+        success = c(0,articles)
+      ))
+```
+
+Row
+-----------------------------------------------------------------------
+
+### Presupuestado vs Ejecutado
 
 ```{r}
 
 ```
 
-Column {data-width=350}
+Row
 -----------------------------------------------------------------------
 
 ### Chart B
@@ -60,10 +117,17 @@ Column {data-width=350}
 ```{r}
 
 ```
-# Tablas
+
+# Graficos {data-navmenu="Analisis" data-icon="fa-signal"}
+
+## Sidebar {.sidebar}
+
+# Tablas {data-navmenu="Analisis" data-icon="fa-list"}
 ```{r}
 datatable(iris)
 ```
+
+
 
 # Informe
 
