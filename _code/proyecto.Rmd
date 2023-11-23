@@ -1,7 +1,6 @@
 ---
 title: "Inversion publica 2006-2022"
 author: "Ada Cueto - Alexander Sucre"
-date: "`r Sys.Date()`"
 output: 
   flexdashboard::flex_dashboard:
     orientation: rows
@@ -17,6 +16,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
+rm(list = ls())
 pacman::p_load(
   flexdashboard,
   tidyverse,
@@ -35,8 +35,9 @@ pacman::p_load(
   knitr,
   DT
 )
+sc <- spark_connect(master = "local")
+proy <- spark_read_csv(sc, name = "proyecto", path = "../_data/Proyectos.csv",memory = F)
 ```
-
 
 # Resumen 
 
@@ -100,22 +101,47 @@ Row
 ### Presupuestado vs Ejecutado
 
 ```{r}
+gest <- proy %>% 
+  select(gestion,inicial=Presupuesto_inicial,ejecutado=presupuesto_ejecutado) %>% 
+  group_by(gestion) %>% 
+  summarise(inicial=sum(inicial),ejecutado=sum(ejecutado)) %>% 
+  arrange(gestion)
+gest <- collect(gest)
 
+fig <- plot_ly(gest, x = ~gestion, y = ~inicial, type = 'scatter', mode = 'lines', fill = 'tozeroy', name = 'Presupuesto programado',fillcolor = 'rgba(168, 216, 234, 0.5)', line = list(width = 0.5))
+fig <- fig %>% add_trace(y = ~ejecutado, name = 'Presupuesto ejecutado',fillcolor = 'rgba(255, 212, 96, 0.5)')
+
+fig <- fig %>% layout(
+  xaxis = list(title = 'Gestión'),
+  yaxis = list(title = 'Monto en millones de dolares'),
+  title = 'Comparación de presupuesto inicial y ejecutado por gestión',
+  plot_bgcolor = 'rgba(0,0,0,0)',
+  paper_bgcolor = 'rgba(0,0,0,0)'
+)
+
+fig
 ```
 
 Row
 -----------------------------------------------------------------------
 
-### Chart B
+### Cantidad de proyectos por departamento
 
 ```{r}
-
+dep <- proy %>% count(depto) %>% rename(Departamento=depto,Cantidad=n)
+dep_local <- collect(dep)
+datatable(dep_local,options = list(paging=FALSE,searching=FALSE,info=FALSE))
 ```
 
-### Chart C
+### Porcentaje de proyectos por departamento
 
 ```{r}
-
+dep <- proy %>% count(depto) %>% mutate(porcentaje = n/sum(n)*100) %>% select(Departamento=depto,Porcentaje=porcentaje)
+dep_local <- collect(dep)
+plot_ly(dep_local,labels=~Departamento,values=~Porcentaje,type = "pie") %>% 
+  layout(title="Proyectos por departamento",
+         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 ```
 
 # Graficos {data-navmenu="Analisis" data-icon="fa-signal"}
