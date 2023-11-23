@@ -1,0 +1,345 @@
+23/11/22 12:43:39 WARN Executor: Issue communicating with driver in heartbeater
+org.apache.spark.rpc.RpcTimeoutException: Futures timed out after [10000 milliseconds]. This timeout is controlled by spark.executor.heartbeatInterval
+	at org.apache.spark.rpc.RpcTimeout.org$apache$spark$rpc$RpcTimeout$$createRpcTimeoutException(RpcTimeout.scala:47)
+	at org.apache.spark.rpc.RpcTimeout$$anonfun$addMessageIfTimeout$1.applyOrElse(RpcTimeout.scala:62)
+	at org.apache.spark.rpc.RpcTimeout$$anonfun$addMessageIfTimeout$1.applyOrElse(RpcTimeout.scala:58)
+	at scala.runtime.AbstractPartialFunction.apply(AbstractPartialFunction.scala:38)
+	at org.apache.spark.rpc.RpcTimeout.awaitResult(RpcTimeout.scala:76)
+	at org.apache.spark.rpc.RpcEndpointRef.askSync(RpcEndpointRef.scala:103)
+	at org.apache.spark.executor.Executor.reportHeartBeat(Executor.scala:930)
+	at org.apache.spark.executor.Executor.$anonfun$heartbeater$1(Executor.scala:200)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at org.apache.spark.util.Utils$.logUncaughtExceptions(Utils.scala:1934)
+	at org.apache.spark.Heartbeater$$anon$1.run(Heartbeater.scala:46)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.runAndReset(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.util.concurrent.TimeoutException: Futures timed out after [10000 milliseconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.ready(Promise.scala:259)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:263)
+	at org.apache.spark.util.ThreadUtils$.awaitResult(ThreadUtils.scala:294)
+	at org.apache.spark.rpc.RpcTimeout.awaitResult(RpcTimeout.scala:75)
+	... 13 more
+23/11/22 12:43:53 WARN Executor: Issue communicating with driver in heartbeater
+org.apache.spark.rpc.RpcTimeoutException: Futures timed out after [10000 milliseconds]. This timeout is controlled by spark.executor.heartbeatInterval
+	at org.apache.spark.rpc.RpcTimeout.org$apache$spark$rpc$RpcTimeout$$createRpcTimeoutException(RpcTimeout.scala:47)
+	at org.apache.spark.rpc.RpcTimeout$$anonfun$addMessageIfTimeout$1.applyOrElse(RpcTimeout.scala:62)
+	at org.apache.spark.rpc.RpcTimeout$$anonfun$addMessageIfTimeout$1.applyOrElse(RpcTimeout.scala:58)
+	at scala.runtime.AbstractPartialFunction.apply(AbstractPartialFunction.scala:38)
+	at org.apache.spark.rpc.RpcTimeout.awaitResult(RpcTimeout.scala:76)
+	at org.apache.spark.rpc.RpcEndpointRef.askSync(RpcEndpointRef.scala:103)
+	at org.apache.spark.executor.Executor.reportHeartBeat(Executor.scala:930)
+	at org.apache.spark.executor.Executor.$anonfun$heartbeater$1(Executor.scala:200)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at org.apache.spark.util.Utils$.logUncaughtExceptions(Utils.scala:1934)
+	at org.apache.spark.Heartbeater$$anon$1.run(Heartbeater.scala:46)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.runAndReset(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.util.concurrent.TimeoutException: Futures timed out after [10000 milliseconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.ready(Promise.scala:259)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:263)
+	at org.apache.spark.util.ThreadUtils$.awaitResult(ThreadUtils.scala:294)
+	at org.apache.spark.rpc.RpcTimeout.awaitResult(RpcTimeout.scala:75)
+	... 13 more
+23/11/22 12:44:03 WARN NettyRpcEnv: Ignored message: HeartbeatResponse(false)
+23/11/22 12:44:03 WARN NettyRpcEnv: Ignored message: HeartbeatResponse(false)
+23/11/22 12:47:19 INFO BlockManagerInfo: Removed broadcast_87_piece0 on activate.navicat.com:57484 in memory (size: 17.7 KiB, free: 906.3 MiB)
+23/11/22 12:47:19 INFO AsyncEventQueue: Process of event SparkListenerExecutorMetricsUpdate(driver,WrappedArray(),Map((-1,-1) -> org.apache.spark.executor.ExecutorMetrics@4ecf164f)) by listener AppStatusListener took 1.4045256s.
+23/11/22 12:47:19 INFO BlockManagerInfo: Removed broadcast_86_piece0 on activate.navicat.com:57484 in memory (size: 17.6 KiB, free: 906.3 MiB)
+23/11/22 12:47:19 INFO BlockManagerInfo: Removed broadcast_85_piece0 on activate.navicat.com:57484 in memory (size: 17.9 KiB, free: 906.4 MiB)
+23/11/22 15:26:19 INFO SparkContext: Starting job: collect at utils.scala:26
+23/11/22 15:26:19 INFO DAGScheduler: Registering RDD 277 (collect at utils.scala:26) as input to shuffle 39
+23/11/22 15:26:19 INFO DAGScheduler: Got job 43 (collect at utils.scala:26) with 1 output partitions
+23/11/22 15:26:19 INFO DAGScheduler: Final stage: ResultStage 91 (collect at utils.scala:26)
+23/11/22 15:26:19 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 90)
+23/11/22 15:26:19 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 90)
+23/11/22 15:26:19 INFO DAGScheduler: Submitting ShuffleMapStage 90 (MapPartitionsRDD[277] at collect at utils.scala:26), which has no missing parents
+23/11/22 15:26:19 INFO MemoryStore: Block broadcast_88 stored as values in memory (estimated size 39.4 KiB, free 906.0 MiB)
+23/11/22 15:26:19 INFO MemoryStore: Block broadcast_88_piece0 stored as bytes in memory (estimated size 17.9 KiB, free 906.0 MiB)
+23/11/22 15:26:19 INFO BlockManagerInfo: Added broadcast_88_piece0 in memory on activate.navicat.com:57484 (size: 17.9 KiB, free: 906.3 MiB)
+23/11/22 15:26:19 INFO SparkContext: Created broadcast 88 from broadcast at DAGScheduler.scala:1223
+23/11/22 15:26:19 INFO DAGScheduler: Submitting 4 missing tasks from ShuffleMapStage 90 (MapPartitionsRDD[277] at collect at utils.scala:26) (first 15 tasks are for partitions Vector(0, 1, 2, 3))
+23/11/22 15:26:19 INFO TaskSchedulerImpl: Adding task set 90.0 with 4 tasks
+23/11/22 15:26:19 INFO TaskSetManager: Starting task 0.0 in stage 90.0 (TID 221, activate.navicat.com, executor driver, partition 0, PROCESS_LOCAL, 7761 bytes)
+23/11/22 15:26:19 INFO TaskSetManager: Starting task 1.0 in stage 90.0 (TID 222, activate.navicat.com, executor driver, partition 1, PROCESS_LOCAL, 7761 bytes)
+23/11/22 15:26:19 INFO TaskSetManager: Starting task 2.0 in stage 90.0 (TID 223, activate.navicat.com, executor driver, partition 2, PROCESS_LOCAL, 7761 bytes)
+23/11/22 15:26:19 INFO TaskSetManager: Starting task 3.0 in stage 90.0 (TID 224, activate.navicat.com, executor driver, partition 3, PROCESS_LOCAL, 7761 bytes)
+23/11/22 15:26:19 INFO Executor: Running task 3.0 in stage 90.0 (TID 224)
+23/11/22 15:26:19 INFO Executor: Running task 0.0 in stage 90.0 (TID 221)
+23/11/22 15:26:19 INFO Executor: Running task 2.0 in stage 90.0 (TID 223)
+23/11/22 15:26:19 INFO Executor: Running task 1.0 in stage 90.0 (TID 222)
+23/11/22 15:26:19 INFO BlockManager: Found block rdd_114_2 locally
+23/11/22 15:26:19 INFO BlockManager: Found block rdd_114_1 locally
+23/11/22 15:26:19 INFO BlockManager: Found block rdd_114_3 locally
+23/11/22 15:26:19 INFO BlockManager: Found block rdd_114_0 locally
+23/11/22 15:26:20 INFO Executor: Finished task 3.0 in stage 90.0 (TID 224). 2362 bytes result sent to driver
+23/11/22 15:26:20 INFO TaskSetManager: Finished task 3.0 in stage 90.0 (TID 224) in 1135 ms on activate.navicat.com (executor driver) (1/4)
+23/11/22 15:26:20 INFO Executor: Finished task 2.0 in stage 90.0 (TID 223). 2319 bytes result sent to driver
+23/11/22 15:26:20 INFO Executor: Finished task 0.0 in stage 90.0 (TID 221). 2319 bytes result sent to driver
+23/11/22 15:26:20 INFO TaskSetManager: Finished task 2.0 in stage 90.0 (TID 223) in 1196 ms on activate.navicat.com (executor driver) (2/4)
+23/11/22 15:26:20 INFO TaskSetManager: Finished task 0.0 in stage 90.0 (TID 221) in 1353 ms on activate.navicat.com (executor driver) (3/4)
+23/11/22 15:26:20 INFO Executor: Finished task 1.0 in stage 90.0 (TID 222). 2319 bytes result sent to driver
+23/11/22 15:26:20 INFO TaskSetManager: Finished task 1.0 in stage 90.0 (TID 222) in 1293 ms on activate.navicat.com (executor driver) (4/4)
+23/11/22 15:26:20 INFO TaskSchedulerImpl: Removed TaskSet 90.0, whose tasks have all completed, from pool 
+23/11/22 15:26:20 INFO DAGScheduler: ShuffleMapStage 90 (collect at utils.scala:26) finished in 1,586 s
+23/11/22 15:26:20 INFO DAGScheduler: looking for newly runnable stages
+23/11/22 15:26:20 INFO DAGScheduler: running: Set()
+23/11/22 15:26:20 INFO DAGScheduler: waiting: Set(ResultStage 91)
+23/11/22 15:26:20 INFO DAGScheduler: failed: Set()
+23/11/22 15:26:20 INFO DAGScheduler: Submitting ResultStage 91 (MapPartitionsRDD[280] at collect at utils.scala:26), which has no missing parents
+23/11/22 15:26:20 INFO MemoryStore: Block broadcast_89 stored as values in memory (estimated size 38.2 KiB, free 906.0 MiB)
+23/11/22 15:26:20 INFO MemoryStore: Block broadcast_89_piece0 stored as bytes in memory (estimated size 17.4 KiB, free 905.9 MiB)
+23/11/22 15:26:20 INFO BlockManagerInfo: Added broadcast_89_piece0 in memory on activate.navicat.com:57484 (size: 17.4 KiB, free: 906.3 MiB)
+23/11/22 15:26:20 INFO SparkContext: Created broadcast 89 from broadcast at DAGScheduler.scala:1223
+23/11/22 15:26:20 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 91 (MapPartitionsRDD[280] at collect at utils.scala:26) (first 15 tasks are for partitions Vector(0))
+23/11/22 15:26:20 INFO TaskSchedulerImpl: Adding task set 91.0 with 1 tasks
+23/11/22 15:26:20 INFO TaskSetManager: Starting task 0.0 in stage 91.0 (TID 225, activate.navicat.com, executor driver, partition 0, NODE_LOCAL, 7325 bytes)
+23/11/22 15:26:20 INFO Executor: Running task 0.0 in stage 91.0 (TID 225)
+23/11/22 15:26:20 INFO ShuffleBlockFetcherIterator: Getting 4 (624.0 B) non-empty blocks including 4 (624.0 B) local and 0 (0.0 B) host-local and 0 (0.0 B) remote blocks
+23/11/22 15:26:20 INFO ShuffleBlockFetcherIterator: Started 0 remote fetches in 0 ms
+23/11/22 15:26:20 INFO Executor: Finished task 0.0 in stage 91.0 (TID 225). 3521 bytes result sent to driver
+23/11/22 15:26:20 INFO TaskSetManager: Finished task 0.0 in stage 91.0 (TID 225) in 66 ms on activate.navicat.com (executor driver) (1/1)
+23/11/22 15:26:20 INFO TaskSchedulerImpl: Removed TaskSet 91.0, whose tasks have all completed, from pool 
+23/11/22 15:26:20 INFO DAGScheduler: ResultStage 91 (collect at utils.scala:26) finished in 0,132 s
+23/11/22 15:26:20 INFO DAGScheduler: Job 43 is finished. Cancelling potential speculative or zombie tasks for this job
+23/11/22 15:26:20 INFO TaskSchedulerImpl: Killing all running tasks in stage 91: Stage finished
+23/11/22 15:26:20 INFO DAGScheduler: Job 43 finished: collect at utils.scala:26, took 1,927706 s
+23/11/22 15:26:21 INFO SparkContext: Starting job: collect at utils.scala:26
+23/11/22 15:26:21 INFO DAGScheduler: Got job 44 (collect at utils.scala:26) with 3 output partitions
+23/11/22 15:26:21 INFO DAGScheduler: Final stage: ResultStage 93 (collect at utils.scala:26)
+23/11/22 15:26:21 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 92)
+23/11/22 15:26:21 INFO DAGScheduler: Missing parents: List()
+23/11/22 15:26:21 INFO DAGScheduler: Submitting ResultStage 93 (MapPartitionsRDD[280] at collect at utils.scala:26), which has no missing parents
+23/11/22 15:26:21 INFO MemoryStore: Block broadcast_90 stored as values in memory (estimated size 38.2 KiB, free 905.9 MiB)
+23/11/22 15:26:21 INFO MemoryStore: Block broadcast_90_piece0 stored as bytes in memory (estimated size 17.4 KiB, free 905.9 MiB)
+23/11/22 15:26:21 INFO BlockManagerInfo: Added broadcast_90_piece0 in memory on activate.navicat.com:57484 (size: 17.4 KiB, free: 906.3 MiB)
+23/11/22 15:26:21 INFO SparkContext: Created broadcast 90 from broadcast at DAGScheduler.scala:1223
+23/11/22 15:26:21 INFO DAGScheduler: Submitting 3 missing tasks from ResultStage 93 (MapPartitionsRDD[280] at collect at utils.scala:26) (first 15 tasks are for partitions Vector(1, 2, 3))
+23/11/22 15:26:21 INFO TaskSchedulerImpl: Adding task set 93.0 with 3 tasks
+23/11/22 15:26:21 INFO TaskSetManager: Starting task 0.0 in stage 93.0 (TID 226, activate.navicat.com, executor driver, partition 1, NODE_LOCAL, 7325 bytes)
+23/11/22 15:26:21 INFO TaskSetManager: Starting task 1.0 in stage 93.0 (TID 227, activate.navicat.com, executor driver, partition 2, NODE_LOCAL, 7325 bytes)
+23/11/22 15:26:21 INFO TaskSetManager: Starting task 2.0 in stage 93.0 (TID 228, activate.navicat.com, executor driver, partition 3, NODE_LOCAL, 7325 bytes)
+23/11/22 15:26:21 INFO Executor: Running task 0.0 in stage 93.0 (TID 226)
+23/11/22 15:26:21 INFO Executor: Running task 1.0 in stage 93.0 (TID 227)
+23/11/22 15:26:21 INFO Executor: Running task 2.0 in stage 93.0 (TID 228)
+23/11/22 15:26:21 INFO ShuffleBlockFetcherIterator: Getting 4 (516.0 B) non-empty blocks including 4 (516.0 B) local and 0 (0.0 B) host-local and 0 (0.0 B) remote blocks
+23/11/22 15:26:21 INFO ShuffleBlockFetcherIterator: Started 0 remote fetches in 0 ms
+23/11/22 15:26:21 INFO ShuffleBlockFetcherIterator: Getting 4 (446.0 B) non-empty blocks including 4 (446.0 B) local and 0 (0.0 B) host-local and 0 (0.0 B) remote blocks
+23/11/22 15:26:21 INFO ShuffleBlockFetcherIterator: Started 0 remote fetches in 0 ms
+23/11/22 15:26:21 INFO ShuffleBlockFetcherIterator: Getting 4 (288.0 B) non-empty blocks including 4 (288.0 B) local and 0 (0.0 B) host-local and 0 (0.0 B) remote blocks
+23/11/22 15:26:21 INFO ShuffleBlockFetcherIterator: Started 0 remote fetches in 0 ms
+23/11/22 15:26:21 INFO Executor: Finished task 1.0 in stage 93.0 (TID 227). 3504 bytes result sent to driver
+23/11/22 15:26:21 INFO TaskSetManager: Finished task 1.0 in stage 93.0 (TID 227) in 46 ms on activate.navicat.com (executor driver) (1/3)
+23/11/22 15:26:21 INFO Executor: Finished task 0.0 in stage 93.0 (TID 226). 3521 bytes result sent to driver
+23/11/22 15:26:21 INFO TaskSetManager: Finished task 0.0 in stage 93.0 (TID 226) in 54 ms on activate.navicat.com (executor driver) (2/3)
+23/11/22 15:26:21 INFO Executor: Finished task 2.0 in stage 93.0 (TID 228). 3442 bytes result sent to driver
+23/11/22 15:26:21 INFO TaskSetManager: Finished task 2.0 in stage 93.0 (TID 228) in 79 ms on activate.navicat.com (executor driver) (3/3)
+23/11/22 15:26:21 INFO TaskSchedulerImpl: Removed TaskSet 93.0, whose tasks have all completed, from pool 
+23/11/22 15:26:21 INFO DAGScheduler: ResultStage 93 (collect at utils.scala:26) finished in 0,091 s
+23/11/22 15:26:21 INFO DAGScheduler: Job 44 is finished. Cancelling potential speculative or zombie tasks for this job
+23/11/22 15:26:21 INFO TaskSchedulerImpl: Killing all running tasks in stage 93: Stage finished
+23/11/22 15:26:21 INFO DAGScheduler: Job 44 finished: collect at utils.scala:26, took 0,108570 s
+23/11/22 15:27:01 INFO SparkContext: Starting job: collect at utils.scala:26
+23/11/22 15:27:01 INFO DAGScheduler: Registering RDD 284 (collect at utils.scala:26) as input to shuffle 40
+23/11/22 15:27:01 INFO DAGScheduler: Got job 45 (collect at utils.scala:26) with 1 output partitions
+23/11/22 15:27:01 INFO DAGScheduler: Final stage: ResultStage 95 (collect at utils.scala:26)
+23/11/22 15:27:01 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 94)
+23/11/22 15:27:01 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 94)
+23/11/22 15:27:01 INFO DAGScheduler: Submitting ShuffleMapStage 94 (MapPartitionsRDD[284] at collect at utils.scala:26), which has no missing parents
+23/11/22 15:27:01 INFO MemoryStore: Block broadcast_91 stored as values in memory (estimated size 39.4 KiB, free 905.8 MiB)
+23/11/22 15:27:01 INFO MemoryStore: Block broadcast_91_piece0 stored as bytes in memory (estimated size 17.9 KiB, free 905.8 MiB)
+23/11/22 15:27:01 INFO BlockManagerInfo: Added broadcast_91_piece0 in memory on activate.navicat.com:57484 (size: 17.9 KiB, free: 906.3 MiB)
+23/11/22 15:27:01 INFO SparkContext: Created broadcast 91 from broadcast at DAGScheduler.scala:1223
+23/11/22 15:27:01 INFO DAGScheduler: Submitting 4 missing tasks from ShuffleMapStage 94 (MapPartitionsRDD[284] at collect at utils.scala:26) (first 15 tasks are for partitions Vector(0, 1, 2, 3))
+23/11/22 15:27:01 INFO TaskSchedulerImpl: Adding task set 94.0 with 4 tasks
+23/11/22 15:27:01 INFO TaskSetManager: Starting task 0.0 in stage 94.0 (TID 229, activate.navicat.com, executor driver, partition 0, PROCESS_LOCAL, 7761 bytes)
+23/11/22 15:27:01 INFO TaskSetManager: Starting task 1.0 in stage 94.0 (TID 230, activate.navicat.com, executor driver, partition 1, PROCESS_LOCAL, 7761 bytes)
+23/11/22 15:27:01 INFO TaskSetManager: Starting task 2.0 in stage 94.0 (TID 231, activate.navicat.com, executor driver, partition 2, PROCESS_LOCAL, 7761 bytes)
+23/11/22 15:27:01 INFO TaskSetManager: Starting task 3.0 in stage 94.0 (TID 232, activate.navicat.com, executor driver, partition 3, PROCESS_LOCAL, 7761 bytes)
+23/11/22 15:27:01 INFO Executor: Running task 0.0 in stage 94.0 (TID 229)
+23/11/22 15:27:01 INFO Executor: Running task 1.0 in stage 94.0 (TID 230)
+23/11/22 15:27:01 INFO Executor: Running task 3.0 in stage 94.0 (TID 232)
+23/11/22 15:27:01 INFO Executor: Running task 2.0 in stage 94.0 (TID 231)
+23/11/22 15:27:01 INFO BlockManager: Found block rdd_114_1 locally
+23/11/22 15:27:01 INFO BlockManager: Found block rdd_114_0 locally
+23/11/22 15:27:01 INFO BlockManager: Found block rdd_114_2 locally
+23/11/22 15:27:01 INFO BlockManager: Found block rdd_114_3 locally
+23/11/22 15:27:01 INFO Executor: Finished task 3.0 in stage 94.0 (TID 232). 2319 bytes result sent to driver
+23/11/22 15:27:01 INFO Executor: Finished task 1.0 in stage 94.0 (TID 230). 2362 bytes result sent to driver
+23/11/22 15:27:01 INFO Executor: Finished task 2.0 in stage 94.0 (TID 231). 2362 bytes result sent to driver
+23/11/22 15:27:01 INFO Executor: Finished task 0.0 in stage 94.0 (TID 229). 2362 bytes result sent to driver
+23/11/22 15:27:01 INFO TaskSetManager: Finished task 1.0 in stage 94.0 (TID 230) in 180 ms on activate.navicat.com (executor driver) (1/4)
+23/11/22 15:27:01 INFO TaskSetManager: Finished task 2.0 in stage 94.0 (TID 231) in 179 ms on activate.navicat.com (executor driver) (2/4)
+23/11/22 15:27:01 INFO TaskSetManager: Finished task 0.0 in stage 94.0 (TID 229) in 183 ms on activate.navicat.com (executor driver) (3/4)
+23/11/22 15:27:01 INFO TaskSetManager: Finished task 3.0 in stage 94.0 (TID 232) in 182 ms on activate.navicat.com (executor driver) (4/4)
+23/11/22 15:27:01 INFO TaskSchedulerImpl: Removed TaskSet 94.0, whose tasks have all completed, from pool 
+23/11/22 15:27:01 INFO DAGScheduler: ShuffleMapStage 94 (collect at utils.scala:26) finished in 0,238 s
+23/11/22 15:27:01 INFO DAGScheduler: looking for newly runnable stages
+23/11/22 15:27:01 INFO DAGScheduler: running: Set()
+23/11/22 15:27:01 INFO DAGScheduler: waiting: Set(ResultStage 95)
+23/11/22 15:27:01 INFO DAGScheduler: failed: Set()
+23/11/22 15:27:01 INFO DAGScheduler: Submitting ResultStage 95 (MapPartitionsRDD[287] at collect at utils.scala:26), which has no missing parents
+23/11/22 15:27:01 INFO MemoryStore: Block broadcast_92 stored as values in memory (estimated size 38.2 KiB, free 905.8 MiB)
+23/11/22 15:27:01 INFO MemoryStore: Block broadcast_92_piece0 stored as bytes in memory (estimated size 17.4 KiB, free 905.8 MiB)
+23/11/22 15:27:01 INFO BlockManagerInfo: Added broadcast_92_piece0 in memory on activate.navicat.com:57484 (size: 17.4 KiB, free: 906.3 MiB)
+23/11/22 15:27:01 INFO SparkContext: Created broadcast 92 from broadcast at DAGScheduler.scala:1223
+23/11/22 15:27:01 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 95 (MapPartitionsRDD[287] at collect at utils.scala:26) (first 15 tasks are for partitions Vector(0))
+23/11/22 15:27:01 INFO TaskSchedulerImpl: Adding task set 95.0 with 1 tasks
+23/11/22 15:27:01 INFO TaskSetManager: Starting task 0.0 in stage 95.0 (TID 233, activate.navicat.com, executor driver, partition 0, NODE_LOCAL, 7325 bytes)
+23/11/22 15:27:01 INFO Executor: Running task 0.0 in stage 95.0 (TID 233)
+23/11/22 15:27:01 INFO ShuffleBlockFetcherIterator: Getting 4 (624.0 B) non-empty blocks including 4 (624.0 B) local and 0 (0.0 B) host-local and 0 (0.0 B) remote blocks
+23/11/22 15:27:01 INFO ShuffleBlockFetcherIterator: Started 0 remote fetches in 1 ms
+23/11/22 15:27:01 INFO Executor: Finished task 0.0 in stage 95.0 (TID 233). 3564 bytes result sent to driver
+23/11/22 15:27:01 INFO TaskSetManager: Finished task 0.0 in stage 95.0 (TID 233) in 28 ms on activate.navicat.com (executor driver) (1/1)
+23/11/22 15:27:01 INFO TaskSchedulerImpl: Removed TaskSet 95.0, whose tasks have all completed, from pool 
+23/11/22 15:27:01 INFO DAGScheduler: ResultStage 95 (collect at utils.scala:26) finished in 0,039 s
+23/11/22 15:27:01 INFO DAGScheduler: Job 45 is finished. Cancelling potential speculative or zombie tasks for this job
+23/11/22 15:27:01 INFO TaskSchedulerImpl: Killing all running tasks in stage 95: Stage finished
+23/11/22 15:27:01 INFO DAGScheduler: Job 45 finished: collect at utils.scala:26, took 0,303234 s
+23/11/22 15:27:01 INFO SparkContext: Starting job: collect at utils.scala:26
+23/11/22 15:27:01 INFO DAGScheduler: Got job 46 (collect at utils.scala:26) with 3 output partitions
+23/11/22 15:27:01 INFO DAGScheduler: Final stage: ResultStage 97 (collect at utils.scala:26)
+23/11/22 15:27:01 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 96)
+23/11/22 15:27:01 INFO DAGScheduler: Missing parents: List()
+23/11/22 15:27:01 INFO DAGScheduler: Submitting ResultStage 97 (MapPartitionsRDD[287] at collect at utils.scala:26), which has no missing parents
+23/11/22 15:27:01 INFO MemoryStore: Block broadcast_93 stored as values in memory (estimated size 38.2 KiB, free 905.7 MiB)
+23/11/22 15:27:01 INFO MemoryStore: Block broadcast_93_piece0 stored as bytes in memory (estimated size 17.4 KiB, free 905.7 MiB)
+23/11/22 15:27:01 INFO BlockManagerInfo: Added broadcast_93_piece0 in memory on activate.navicat.com:57484 (size: 17.4 KiB, free: 906.3 MiB)
+23/11/22 15:27:01 INFO SparkContext: Created broadcast 93 from broadcast at DAGScheduler.scala:1223
+23/11/22 15:27:01 INFO DAGScheduler: Submitting 3 missing tasks from ResultStage 97 (MapPartitionsRDD[287] at collect at utils.scala:26) (first 15 tasks are for partitions Vector(1, 2, 3))
+23/11/22 15:27:01 INFO TaskSchedulerImpl: Adding task set 97.0 with 3 tasks
+23/11/22 15:27:01 INFO TaskSetManager: Starting task 0.0 in stage 97.0 (TID 234, activate.navicat.com, executor driver, partition 1, NODE_LOCAL, 7325 bytes)
+23/11/22 15:27:01 INFO TaskSetManager: Starting task 1.0 in stage 97.0 (TID 235, activate.navicat.com, executor driver, partition 2, NODE_LOCAL, 7325 bytes)
+23/11/22 15:27:01 INFO TaskSetManager: Starting task 2.0 in stage 97.0 (TID 236, activate.navicat.com, executor driver, partition 3, NODE_LOCAL, 7325 bytes)
+23/11/22 15:27:01 INFO Executor: Running task 1.0 in stage 97.0 (TID 235)
+23/11/22 15:27:01 INFO Executor: Running task 2.0 in stage 97.0 (TID 236)
+23/11/22 15:27:01 INFO Executor: Running task 0.0 in stage 97.0 (TID 234)
+23/11/22 15:27:01 INFO ShuffleBlockFetcherIterator: Getting 4 (516.0 B) non-empty blocks including 4 (516.0 B) local and 0 (0.0 B) host-local and 0 (0.0 B) remote blocks
+23/11/22 15:27:01 INFO ShuffleBlockFetcherIterator: Started 0 remote fetches in 0 ms
+23/11/22 15:27:01 INFO ShuffleBlockFetcherIterator: Getting 4 (288.0 B) non-empty blocks including 4 (288.0 B) local and 0 (0.0 B) host-local and 0 (0.0 B) remote blocks
+23/11/22 15:27:01 INFO ShuffleBlockFetcherIterator: Started 0 remote fetches in 0 ms
+23/11/22 15:27:01 INFO Executor: Finished task 1.0 in stage 97.0 (TID 235). 3547 bytes result sent to driver
+23/11/22 15:27:01 INFO TaskSetManager: Finished task 1.0 in stage 97.0 (TID 235) in 21 ms on activate.navicat.com (executor driver) (1/3)
+23/11/22 15:27:01 INFO Executor: Finished task 2.0 in stage 97.0 (TID 236). 3442 bytes result sent to driver
+23/11/22 15:27:01 INFO TaskSetManager: Finished task 2.0 in stage 97.0 (TID 236) in 38 ms on activate.navicat.com (executor driver) (2/3)
+23/11/22 15:27:01 INFO ShuffleBlockFetcherIterator: Getting 4 (446.0 B) non-empty blocks including 4 (446.0 B) local and 0 (0.0 B) host-local and 0 (0.0 B) remote blocks
+23/11/22 15:27:01 INFO ShuffleBlockFetcherIterator: Started 0 remote fetches in 0 ms
+23/11/22 15:27:01 INFO Executor: Finished task 0.0 in stage 97.0 (TID 234). 3478 bytes result sent to driver
+23/11/22 15:27:01 INFO TaskSetManager: Finished task 0.0 in stage 97.0 (TID 234) in 126 ms on activate.navicat.com (executor driver) (3/3)
+23/11/22 15:27:01 INFO TaskSchedulerImpl: Removed TaskSet 97.0, whose tasks have all completed, from pool 
+23/11/22 15:27:01 INFO DAGScheduler: ResultStage 97 (collect at utils.scala:26) finished in 0,135 s
+23/11/22 15:27:01 INFO DAGScheduler: Job 46 is finished. Cancelling potential speculative or zombie tasks for this job
+23/11/22 15:27:01 INFO TaskSchedulerImpl: Killing all running tasks in stage 97: Stage finished
+23/11/22 15:27:01 INFO DAGScheduler: Job 46 finished: collect at utils.scala:26, took 0,151856 s
+23/11/22 15:31:34 INFO BlockManagerInfo: Removed broadcast_90_piece0 on activate.navicat.com:57484 in memory (size: 17.4 KiB, free: 906.3 MiB)
+23/11/22 15:31:34 INFO BlockManagerInfo: Removed broadcast_88_piece0 on activate.navicat.com:57484 in memory (size: 17.9 KiB, free: 906.3 MiB)
+23/11/22 15:31:34 INFO BlockManagerInfo: Removed broadcast_92_piece0 on activate.navicat.com:57484 in memory (size: 17.4 KiB, free: 906.3 MiB)
+23/11/22 15:31:34 INFO BlockManagerInfo: Removed broadcast_93_piece0 on activate.navicat.com:57484 in memory (size: 17.4 KiB, free: 906.3 MiB)
+23/11/22 15:31:34 INFO BlockManagerInfo: Removed broadcast_91_piece0 on activate.navicat.com:57484 in memory (size: 17.9 KiB, free: 906.3 MiB)
+23/11/22 15:31:34 INFO BlockManagerInfo: Removed broadcast_89_piece0 on activate.navicat.com:57484 in memory (size: 17.4 KiB, free: 906.4 MiB)
+23/11/22 15:37:29 INFO SparkContext: Invoking stop() from shutdown hook
+23/11/22 15:37:30 INFO SparkUI: Stopped Spark web UI at http://activate.navicat.com:4040
+23/11/22 15:37:30 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+23/11/22 15:37:32 INFO MemoryStore: MemoryStore cleared
+23/11/22 15:37:32 INFO BlockManager: BlockManager stopped
+23/11/22 15:37:32 INFO BlockManagerMaster: BlockManagerMaster stopped
+23/11/22 15:37:32 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+23/11/22 15:37:32 WARN SparkEnv: Exception while deleting Spark temp dir: C:\Users\SRANC\AppData\Local\spark\spark-3.0.3-bin-hadoop3.2\tmp\local\spark-ef8d1c53-3766-4b5d-890b-2e353b843741\userFiles-3b17986b-9417-4004-a730-2bcf55a3e5f0
+java.io.IOException: Failed to delete: C:\Users\SRANC\AppData\Local\spark\spark-3.0.3-bin-hadoop3.2\tmp\local\spark-ef8d1c53-3766-4b5d-890b-2e353b843741\userFiles-3b17986b-9417-4004-a730-2bcf55a3e5f0\sparklyr-3.0-2.12.jar
+	at org.apache.spark.network.util.JavaUtils.deleteRecursivelyUsingJavaIO(JavaUtils.java:144)
+	at org.apache.spark.network.util.JavaUtils.deleteRecursively(JavaUtils.java:118)
+	at org.apache.spark.network.util.JavaUtils.deleteRecursivelyUsingJavaIO(JavaUtils.java:128)
+	at org.apache.spark.network.util.JavaUtils.deleteRecursively(JavaUtils.java:118)
+	at org.apache.spark.network.util.JavaUtils.deleteRecursively(JavaUtils.java:91)
+	at org.apache.spark.util.Utils$.deleteRecursively(Utils.scala:1079)
+	at org.apache.spark.SparkEnv.stop(SparkEnv.scala:105)
+	at org.apache.spark.SparkContext.$anonfun$stop$23(SparkContext.scala:2027)
+	at org.apache.spark.util.Utils$.tryLogNonFatalError(Utils.scala:1357)
+	at org.apache.spark.SparkContext.stop(SparkContext.scala:2027)
+	at org.apache.spark.SparkContext.$anonfun$new$35(SparkContext.scala:638)
+	at org.apache.spark.util.SparkShutdownHook.run(ShutdownHookManager.scala:214)
+	at org.apache.spark.util.SparkShutdownHookManager.$anonfun$runAll$2(ShutdownHookManager.scala:188)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at org.apache.spark.util.Utils$.logUncaughtExceptions(Utils.scala:1934)
+	at org.apache.spark.util.SparkShutdownHookManager.$anonfun$runAll$1(ShutdownHookManager.scala:188)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at scala.util.Try$.apply(Try.scala:213)
+	at org.apache.spark.util.SparkShutdownHookManager.runAll(ShutdownHookManager.scala:188)
+	at org.apache.spark.util.SparkShutdownHookManager$$anon$2.run(ShutdownHookManager.scala:178)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+23/11/22 15:37:32 INFO SparkContext: Successfully stopped SparkContext
+23/11/22 15:37:32 INFO ShutdownHookManager: Shutdown hook called
+23/11/22 15:37:32 INFO ShutdownHookManager: Deleting directory C:\Users\SRANC\AppData\Local\spark\spark-3.0.3-bin-hadoop3.2\tmp\local\spark-ef8d1c53-3766-4b5d-890b-2e353b843741
+23/11/22 15:37:32 ERROR ShutdownHookManager: Exception while deleting Spark temp dir: C:\Users\SRANC\AppData\Local\spark\spark-3.0.3-bin-hadoop3.2\tmp\local\spark-ef8d1c53-3766-4b5d-890b-2e353b843741
+java.io.IOException: Failed to delete: C:\Users\SRANC\AppData\Local\spark\spark-3.0.3-bin-hadoop3.2\tmp\local\spark-ef8d1c53-3766-4b5d-890b-2e353b843741\userFiles-3b17986b-9417-4004-a730-2bcf55a3e5f0\sparklyr-3.0-2.12.jar
+	at org.apache.spark.network.util.JavaUtils.deleteRecursivelyUsingJavaIO(JavaUtils.java:144)
+	at org.apache.spark.network.util.JavaUtils.deleteRecursively(JavaUtils.java:118)
+	at org.apache.spark.network.util.JavaUtils.deleteRecursivelyUsingJavaIO(JavaUtils.java:128)
+	at org.apache.spark.network.util.JavaUtils.deleteRecursively(JavaUtils.java:118)
+	at org.apache.spark.network.util.JavaUtils.deleteRecursivelyUsingJavaIO(JavaUtils.java:128)
+	at org.apache.spark.network.util.JavaUtils.deleteRecursively(JavaUtils.java:118)
+	at org.apache.spark.network.util.JavaUtils.deleteRecursively(JavaUtils.java:91)
+	at org.apache.spark.util.Utils$.deleteRecursively(Utils.scala:1079)
+	at org.apache.spark.util.ShutdownHookManager$.$anonfun$new$4(ShutdownHookManager.scala:65)
+	at org.apache.spark.util.ShutdownHookManager$.$anonfun$new$4$adapted(ShutdownHookManager.scala:62)
+	at scala.collection.IndexedSeqOptimized.foreach(IndexedSeqOptimized.scala:36)
+	at scala.collection.IndexedSeqOptimized.foreach$(IndexedSeqOptimized.scala:33)
+	at scala.collection.mutable.ArrayOps$ofRef.foreach(ArrayOps.scala:198)
+	at org.apache.spark.util.ShutdownHookManager$.$anonfun$new$2(ShutdownHookManager.scala:62)
+	at org.apache.spark.util.SparkShutdownHook.run(ShutdownHookManager.scala:214)
+	at org.apache.spark.util.SparkShutdownHookManager.$anonfun$runAll$2(ShutdownHookManager.scala:188)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at org.apache.spark.util.Utils$.logUncaughtExceptions(Utils.scala:1934)
+	at org.apache.spark.util.SparkShutdownHookManager.$anonfun$runAll$1(ShutdownHookManager.scala:188)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at scala.util.Try$.apply(Try.scala:213)
+	at org.apache.spark.util.SparkShutdownHookManager.runAll(ShutdownHookManager.scala:188)
+	at org.apache.spark.util.SparkShutdownHookManager$$anon$2.run(ShutdownHookManager.scala:178)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+23/11/22 15:37:32 INFO ShutdownHookManager: Deleting directory C:\Users\SRANC\AppData\Local\Temp\spark-a9bb9c4e-f563-4efd-b2d5-ac25bd7c0b4f
+23/11/22 15:37:32 INFO ShutdownHookManager: Deleting directory C:\Users\SRANC\AppData\Local\spark\spark-3.0.3-bin-hadoop3.2\tmp\local\spark-ef8d1c53-3766-4b5d-890b-2e353b843741\userFiles-3b17986b-9417-4004-a730-2bcf55a3e5f0
+23/11/22 15:37:32 ERROR ShutdownHookManager: Exception while deleting Spark temp dir: C:\Users\SRANC\AppData\Local\spark\spark-3.0.3-bin-hadoop3.2\tmp\local\spark-ef8d1c53-3766-4b5d-890b-2e353b843741\userFiles-3b17986b-9417-4004-a730-2bcf55a3e5f0
+java.io.IOException: Failed to delete: C:\Users\SRANC\AppData\Local\spark\spark-3.0.3-bin-hadoop3.2\tmp\local\spark-ef8d1c53-3766-4b5d-890b-2e353b843741\userFiles-3b17986b-9417-4004-a730-2bcf55a3e5f0\sparklyr-3.0-2.12.jar
+	at org.apache.spark.network.util.JavaUtils.deleteRecursivelyUsingJavaIO(JavaUtils.java:144)
+	at org.apache.spark.network.util.JavaUtils.deleteRecursively(JavaUtils.java:118)
+	at org.apache.spark.network.util.JavaUtils.deleteRecursivelyUsingJavaIO(JavaUtils.java:128)
+	at org.apache.spark.network.util.JavaUtils.deleteRecursively(JavaUtils.java:118)
+	at org.apache.spark.network.util.JavaUtils.deleteRecursively(JavaUtils.java:91)
+	at org.apache.spark.util.Utils$.deleteRecursively(Utils.scala:1079)
+	at org.apache.spark.util.ShutdownHookManager$.$anonfun$new$4(ShutdownHookManager.scala:65)
+	at org.apache.spark.util.ShutdownHookManager$.$anonfun$new$4$adapted(ShutdownHookManager.scala:62)
+	at scala.collection.IndexedSeqOptimized.foreach(IndexedSeqOptimized.scala:36)
+	at scala.collection.IndexedSeqOptimized.foreach$(IndexedSeqOptimized.scala:33)
+	at scala.collection.mutable.ArrayOps$ofRef.foreach(ArrayOps.scala:198)
+	at org.apache.spark.util.ShutdownHookManager$.$anonfun$new$2(ShutdownHookManager.scala:62)
+	at org.apache.spark.util.SparkShutdownHook.run(ShutdownHookManager.scala:214)
+	at org.apache.spark.util.SparkShutdownHookManager.$anonfun$runAll$2(ShutdownHookManager.scala:188)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at org.apache.spark.util.Utils$.logUncaughtExceptions(Utils.scala:1934)
+	at org.apache.spark.util.SparkShutdownHookManager.$anonfun$runAll$1(ShutdownHookManager.scala:188)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at scala.util.Try$.apply(Try.scala:213)
+	at org.apache.spark.util.SparkShutdownHookManager.runAll(ShutdownHookManager.scala:188)
+	at org.apache.spark.util.SparkShutdownHookManager$$anon$2.run(ShutdownHookManager.scala:178)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)

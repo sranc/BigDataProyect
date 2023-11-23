@@ -1,5 +1,5 @@
 ---
-title: "Trabajo de Investigación"
+title: "Inversion pública 2006-2022"
 subtitle: "Maestría en Ciencia de Datos"
 author: |
   | Docente: 
@@ -17,63 +17,55 @@ toc: TRUE
 
 \pagebreak
 # Introducción
-La información estadística disponible
-Otro cambio en la web de github
 
-#   Objetivos
+La importancia de la inversión pública, radica en que la adecuada asignación de esta permite el crecimiento de los distintos sectores económico productivos, mediante la canalización de dichos recursos vía las diversas entidades de la *Administración Central*, *Instituciones descentralizadas*, *Gobernaciones*, *Municipalidades*, *Instituciones de Seguridad Social*, *Empresas públicas*, *Instituciones públicas financieras* y *Universidades*.
 
+El presente trabajo presenta el tratamiento de una base de datos, presentando información relevante respecto al cumplimiento de la asignación presupuestaria.
 
-#   Motivación
+# Objetivos
 
-#   Marco teórico
+Obtener indicadores de asignación presupuestaria y su ejecución, desde distintos puntos de vista.
 
-#   Descripción de la base de datos
+# Motivación
+
+Poder obtener diversos resultados, mediante la aplicación del software R y sus diversas librerías, demostrando lo útil de uso de recursos tecnológicos para generar información relevante.
+
+# Marco teórico
+
+- Inversión pública. Todo gasto de recursos de origen público destinado a incrementar, mejorar o reponer las existencias de capital físico de dominio público y/o de capital humano, con el objeto de ampliar la capacidad del país para la prestación de servicios o producción de bienes.[^invpub]
+
+[^invpub]: Normas básicas del Sistema Nacional de Inversión Pública, aprobada con Resolución Suprema
+Nº 216768
+
+# Descripción de la base de datos
+
+Datos que detallan el *presupuesto asignado* y la *ejecución presupuestaria* de las diversas entidades dependientes de la Administración Central.
+
+Se presenta el semestre, año, sector, tipo de sector, departamento, región, provincia, tipo de proyecto, entidad, tipo de entidad, sigla de entidad, tipo de recurso, tipo de financiamiento, presupuesto inicial, presupuesto vigente y presupuesto ejecutado.
+
+| Nro. | Variable              | Descripción                                                                 | Tipo y longitud |
+|:----:|-----------------------|-----------------------------------------------------------------------------|:---------------:|
+|   1  | gestion               | El año del proyecto                                                         |                 |
+|   2  | periodo               | Periodo semestral, designados como PRIMER PERIODO y SEGUNDO PERIODO         |                 |
+|   3  | sector                | Sector económico, productivo u otra denominación                            |                 |
+|   4  | tipo_sector           | Sector social, productivo, multisectorial e infraestructura                 |                 |
+|   5  | depto                 | Departamento del proyecto, NACIONAL en caso de que sea de beneficio general |                 |
+|   6  | region                |                                                                             |                 |
+|   7  | provincia             |                                                                             |                 |
+|   8  | tipo_proyecto         |                                                                             |                 |
+|   9  | entidad               |                                                                             |                 |
+|  10  | tipo_entidad_agrupado |                                                                             |                 |
+|  11  | sigla_entidad         |                                                                             |                 |
+|  12  | tipo_recurso          |                                                                             |                 |
+|  13  | tipo_entidad          |                                                                             |                 |
+|  14  | tipo_financiamiento   |                                                                             |                 |
+|  15  | Presupuesto_inicial   |                                                                             |                 |
+|  16  | presupuesto_vigente   |                                                                             |                 |
+|  17  | presupuesto_ejecutado |                                                                             |                 |
 
 # Metodología
 
 ## 1. Indicadores y fichas de indicadores
-
->Primer formato de ficha sugerido
-
-||Ficha de Indicador|||
-|-----|:-----:|-----|-----|
-||Presupuestado vs ejecutado|||
-|Proceso||Fecha||
-|Nombre||||
-|Tipo||||
-|Objetivo||||
-|Fórmula||||
-|Fuente de información||||
-|Unidad de medida||Periodo de medición|2006-2022|
-
-
-
-||Ficha de Indicador|||
-|-----|:-----:|-----|-----|
-||Presupuesto por departamento|||
-|Proceso||Fecha||
-|Nombre||||
-|Tipo||||
-|Objetivo||||
-|Fórmula||||
-|Fuente de información||||
-|Unidad de medida||Periodo de medición|2006-2022|
-
-
-
-||Ficha de Indicador|||
-|-----|:-----:|-----|-----|
-||Ejecución por tipo de entidad|||
-|Proceso||Fecha||
-|Nombre||||
-|Tipo||||
-|Objetivo||||
-|Fórmula||||
-|Fuente de información||||
-|Unidad de medida||Periodo de medición|2006-2022|
-
-
->Segundo formato sugerido
 
 |INDICADOR|EJECUCIÓN POR MUNICIPIO|
 |-----|-----|
