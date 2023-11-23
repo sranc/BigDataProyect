@@ -41,27 +41,27 @@ Nº 216768
 
 Datos que detallan el *presupuesto asignado* y la *ejecución presupuestaria* de las diversas entidades dependientes de la Administración Central.
 
-Se presenta el semestre, año, sector, tipo de sector, departamento, región, provincia, tipo de proyecto, entidad, tipo de entidad, sigla de entidad, tipo de recurso, tipo de financiamiento, presupuesto inicial, presupuesto vigente y presupuesto ejecutado.
+Las variables consideradas son las siguientes:
 
-| Nro. | Variable              | Descripción                                                                 | Tipo y longitud |
-|:----:|-----------------------|-----------------------------------------------------------------------------|:---------------:|
-|   1  | gestion               | El año del proyecto                                                         |                 |
-|   2  | periodo               | Periodo semestral, designados como PRIMER PERIODO y SEGUNDO PERIODO         |                 |
-|   3  | sector                | Sector económico, productivo u otra denominación                            |                 |
-|   4  | tipo_sector           | Sector social, productivo, multisectorial e infraestructura                 |                 |
-|   5  | depto                 | Departamento del proyecto, NACIONAL en caso de que sea de beneficio general |                 |
-|   6  | region                |                                                                             |                 |
-|   7  | provincia             |                                                                             |                 |
-|   8  | tipo_proyecto         |                                                                             |                 |
-|   9  | entidad               |                                                                             |                 |
-|  10  | tipo_entidad_agrupado |                                                                             |                 |
-|  11  | sigla_entidad         |                                                                             |                 |
-|  12  | tipo_recurso          |                                                                             |                 |
-|  13  | tipo_entidad          |                                                                             |                 |
-|  14  | tipo_financiamiento   |                                                                             |                 |
-|  15  | Presupuesto_inicial   |                                                                             |                 |
-|  16  | presupuesto_vigente   |                                                                             |                 |
-|  17  | presupuesto_ejecutado |                                                                             |                 |
+| Nro. | Variable              | Descripción                                                                   |   Tipo   |
+|:----:|-----------------------|-------------------------------------------------------------------------------|:--------:|
+|   1  | gestion               | El año del proyecto                                                           | Cadena   |
+|   2  | periodo               | Periodo semestral, designados como PRIMER PERIODO y SEGUNDO PERIODO           | Cadena   |
+|   3  | sector                | Sector económico, productivo u otra denominación                              | Cadena   |
+|   4  | tipo_sector           | Sector social, productivo, multisectorial e infraestructura                   | Cadena   |
+|   5  | depto                 | Departamento del proyecto, NACIONAL en caso de que sea de beneficio general   | Cadena   |
+|   6  | region                | Región: Altiplano, Valle, Llano y Nacional                                    | Cadena   |
+|   7  | provincia             | Provincia en la que se realizó el proyecto                                    | Cadena   |
+|   8  | tipo_proyecto         | Ámbito de aplicación del proyecto                                             | Cadena   |
+|   9  | entidad               | Entidad responsable del proyecto y que recibió los recursos para su ejecución | Cadena   |
+|  10  | tipo_entidad_agrupado | Tipo de entidad agrupada por rubro                                            | Cadena   |
+|  11  | sigla_entidad         | Sigla de la entidad                                                           | Cadena   |
+|  12  | tipo_recurso          | Si la fuente de financiamiento es interna o externa                           | Cadena   |
+|  13  | tipo_entidad          | Tipo de entidad según su rol a nivel nacional                                 | Cadena   |
+|  14  | tipo_financiamiento   | Tipo de financiamiento, fuente de los recursos                                | Cadena   |
+|  15  | Presupuesto_inicial   | Presupuesto asignado inicialmente                                             | Numérico |
+|  16  | presupuesto_vigente   | Presupuesto vigente                                                           | Numérico |
+|  17  | presupuesto_ejecutado | Presupuesto ejecutado                                                         | Numérico |
 
 # Metodología
 
