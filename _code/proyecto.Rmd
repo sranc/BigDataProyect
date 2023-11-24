@@ -39,7 +39,7 @@ sc <- spark_connect(master = "local")
 proy <- spark_read_csv(sc, name = "proyecto", path = "../_data/Proyectos.csv",memory = F)
 ```
 
-# Resumen 
+# Resumen {data-icon="fa-home"}
 
 ```{r}
 ```
@@ -50,48 +50,40 @@ Row
 ### Cantidad de proyectos {.value-box}
 
 ```{r}
-articles <- 25
-valueBox(articles, icon = "fa-pencil")
+tot_proy <- proy %>% count() %>% rename(total=n) %>% collect()
+valueBox(tot_proy, icon = "fa-database",color = "info")
 ```
 
-### Total presupuestado {.value-box}
+### Total presupuesto inicial {.value-box}
 
 ```{r}
-articles <- 25
-valueBox(articles, icon = "fa-pencil")
+tot_pres <- proy %>% summarise(total=round(sum(Presupuesto_inicial),2)) %>% collect()
+valueBox(tot_pres, icon = "fa-dollar-sign",color = "primary")
 ```
 
-### Total en ejecucion {.value-box}
+### Total presupuesto vigente {.value-box}
 
 ```{r}
-articles <- 25
-valueBox(articles, icon = "fa-pencil")
+tot_vig <- proy %>% 
+  mutate(total=ifelse(!is.na(presupuesto_vigente) & presupuesto_vigente > 0,presupuesto_vigente,Presupuesto_inicial)) %>% 
+  summarize(total = round(sum(total),2)) %>% collect()
+valueBox(tot_vig, icon = "fa-chart-line",color = "danger")
 ```
 
 ### Total ejecutado {.value-box}
 
 ```{r}
-articles <- 25
-valueBox(articles, icon = "fa-pencil")
-```
-
-### % en ejecucion 
-
-```{r}
-articles <- 25
-gauge(articles, min = 0, max = 100, symbol = "%",
-      gaugeSectors(
-        warning = c(0,articles)
-      ))
+tot_ejec <- proy %>% summarise(total=round(sum(presupuesto_ejecutado,na.rm = TRUE),2)) %>% collect()
+valueBox(tot_ejec, icon = "fa-money-bill-alt",color = "success")
 ```
 
 ### % ejecutado 
 
 ```{r}
-articles <- 66
-gauge(articles, min = 0, max = 100, symbol = "%",
+por_ejec <- round(tot_ejec/tot_vig*100)
+gauge(por_ejec$total, min = 0, max = 100, symbol = "%",
       gaugeSectors(
-        success = c(0,articles)
+        success = c(0,por_ejec$total)
       ))
 ```
 
@@ -102,21 +94,20 @@ Row
 
 ```{r}
 gest <- proy %>% 
-  select(gestion,inicial=Presupuesto_inicial,ejecutado=presupuesto_ejecutado) %>% 
+  select(gestion,inicial=Presupuesto_inicial,vigente=presupuesto_vigente,ejecutado=presupuesto_ejecutado) %>% 
   group_by(gestion) %>% 
-  summarise(inicial=sum(inicial),ejecutado=sum(ejecutado)) %>% 
-  arrange(gestion)
-gest <- collect(gest)
+  summarise(inicial=sum(inicial),vigente=sum(vigente),ejecutado=sum(ejecutado)) %>% 
+  arrange(gestion) %>% 
+  collect()
 
-fig <- plot_ly(gest, x = ~gestion, y = ~inicial, type = 'scatter', mode = 'lines', fill = 'tozeroy', name = 'Presupuesto programado',fillcolor = 'rgba(168, 216, 234, 0.5)', line = list(width = 0.5))
-fig <- fig %>% add_trace(y = ~ejecutado, name = 'Presupuesto ejecutado',fillcolor = 'rgba(255, 212, 96, 0.5)')
+fig <- plot_ly(gest, x = ~gestion, y = ~inicial, type = 'scatter', mode = 'lines', fill = 'tozeroy', name = 'Inicial',fillcolor = 'primary')
+fig <- fig %>% add_trace(y = ~vigente, name = 'Vigente',fillcolor = 'danger')
+fig <- fig %>% add_trace(y = ~ejecutado, name = 'Ejecutado',fillcolor = 'info')
 
 fig <- fig %>% layout(
   xaxis = list(title = 'Gestión'),
   yaxis = list(title = 'Monto en millones de dolares'),
-  title = 'Comparación de presupuesto inicial y ejecutado por gestión',
-  plot_bgcolor = 'rgba(0,0,0,0)',
-  paper_bgcolor = 'rgba(0,0,0,0)'
+  title = 'Comparación de presupuesto inicial, vigente y ejecutado por gestión'
 )
 
 fig
