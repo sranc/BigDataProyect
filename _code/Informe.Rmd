@@ -1,5 +1,5 @@
 ---
-title: "Trabajo de Investigación"
+title: "Inversion pública 2006-2022"
 subtitle: "Maestría en Ciencia de Datos"
 author: |
   | Docente: 
@@ -17,63 +17,70 @@ toc: TRUE
 
 \pagebreak
 # Introducción
-La información estadística disponible
-Otro cambio en la web de github
 
-#   Objetivos
+La importancia de la inversión pública, radica en que la adecuada asignación de esta permite el crecimiento de los distintos sectores económico productivos, mediante la canalización de dichos recursos vía las diversas entidades de la *Administración Central*, *Instituciones descentralizadas*, *Gobernaciones*, *Municipalidades*, *Instituciones de Seguridad Social*, *Empresas públicas*, *Instituciones públicas financieras* y *Universidades*.
+
+El presente trabajo presenta el tratamiento de una base de datos, presentando información relevante respecto al cumplimiento de la asignación presupuestaria.
+
+# Objetivos
+
+Obtener indicadores de asignación presupuestaria y su ejecución, desde distintos puntos de vista.
+
+# Motivación
+
+Poder obtener diversos resultados, mediante la aplicación del software R y sus diversas librerías, demostrando lo útil de uso de recursos tecnológicos para generar información relevante.
+
+# Marco teórico
+
+- Inversión pública. Todo gasto de recursos de origen público destinado a incrementar, mejorar o reponer las existencias de capital físico de dominio público y/o de capital humano, con el objeto de ampliar la capacidad del país para la prestación de servicios o producción de bienes.[^invpub]
+- Fuentes de financiamiento para la Inversión Pública. Se identifican las siguientes fuentes de financiamiento para los proyectos de inversión pública[^fuenfin]:
+  a) Recursos del Tesoro General de la Nación: Administrados por el Gobierno Central que se transfieren a las entidades de la Administración Central y al Fondo Compensatorio de Regalías, para financiar el Presupuesto de Inversión Pública.
+  b) Recursos Específicos de las Entidades Públicas: Son recursos que se perciben y administran directamente por las
+entidades públicas y se utilizan para financiar sus Presupuestos de Inversión Pública y que deben ser incorporados en el PGN.
+  c) Recursos Externos: Son recursos que el Organo Rector del SNIP contrata de Organismos Financieros Multilaterales, Agencias de Cooperación Internacional y
+Gobiernos, mediante convenios de crédito o donación, y que se transfieren a las entidades del sector público para financiar el Programa de Inversión Pública.
+- Asignación presupuestaria es un intrumento que permite planificar, organizar, dirigir y controlar cada uno de los recursos del Estado, el mismo debe cumplirse de manera obligatoria con el fin de gestionar y programar los ingresos y egresos para el adecuado financiamiento público[^asigpresup].
+- Proyecto. Tiene como objetivo la producción de bienes y servicios destinados a la satisfacción de una necesidad[^proyect].
 
 
-#   Motivación
+[^invpub]: Normas básicas del Sistema Nacional de Inversión Pública, aprobada con Resolución Suprema
+Nº 216768. Artículo 8
+[^fuenfin]: Normas básicas del Sistema Nacional de Inversión Pública, aprobada con Resolución Suprema
+Nº 216768. Artículo 9
+[^asigpresup]: La asignación presupuestaria y su incidencia en la Administración Pública. Número Publicado el 20 de agosto de 2018. Fundación Dialnet
+[^proyect]: Directrices de Formulación Presupuestaria, y de Planificación e Inversión Pública para el presupuesto gestión 2017. Página 22
 
-#   Marco teórico
 
-#   Descripción de la base de datos
+
+# Descripción de la base de datos
+
+Datos que detallan el *presupuesto asignado* y la *ejecución presupuestaria* de las diversas entidades dependientes de la Administración Central.
+
+Las variables consideradas son las siguientes:
+
+| Nro. | Variable              | Descripción                                                                   |   Tipo   |
+|:----:|-----------------------|-------------------------------------------------------------------------------|:--------:|
+|   1  | gestion               | El año del proyecto                                                           | Cadena   |
+|   2  | periodo               | Periodo semestral, designados como PRIMER PERIODO y SEGUNDO PERIODO           | Cadena   |
+|   3  | sector                | Sector económico, productivo u otra denominación                              | Cadena   |
+|   4  | tipo_sector           | Sector social, productivo, multisectorial e infraestructura                   | Cadena   |
+|   5  | depto                 | Departamento del proyecto, NACIONAL en caso de que sea de beneficio general   | Cadena   |
+|   6  | region                | Región: Altiplano, Valle, Llano y Nacional                                    | Cadena   |
+|   7  | provincia             | Provincia en la que se realizó el proyecto                                    | Cadena   |
+|   8  | tipo_proyecto         | Ámbito de aplicación del proyecto                                             | Cadena   |
+|   9  | entidad               | Entidad responsable del proyecto y que recibió los recursos para su ejecución | Cadena   |
+|  10  | tipo_entidad_agrupado | Tipo de entidad agrupada por rubro                                            | Cadena   |
+|  11  | sigla_entidad         | Sigla de la entidad                                                           | Cadena   |
+|  12  | tipo_recurso          | Si la fuente de financiamiento es interna o externa                           | Cadena   |
+|  13  | tipo_entidad          | Tipo de entidad según su rol a nivel nacional                                 | Cadena   |
+|  14  | tipo_financiamiento   | Tipo de financiamiento, fuente de los recursos                                | Cadena   |
+|  15  | Presupuesto_inicial   | Presupuesto asignado inicialmente                                             | Numérico |
+|  16  | presupuesto_vigente   | Presupuesto vigente                                                           | Numérico |
+|  17  | presupuesto_ejecutado | Presupuesto ejecutado                                                         | Numérico |
 
 # Metodología
 
 ## 1. Indicadores y fichas de indicadores
-
->Primer formato de ficha sugerido
-
-||Ficha de Indicador|||
-|-----|:-----:|-----|-----|
-||Presupuestado vs ejecutado|||
-|Proceso||Fecha||
-|Nombre||||
-|Tipo||||
-|Objetivo||||
-|Fórmula||||
-|Fuente de información||||
-|Unidad de medida||Periodo de medición|2006-2022|
-
-
-
-||Ficha de Indicador|||
-|-----|:-----:|-----|-----|
-||Presupuesto por departamento|||
-|Proceso||Fecha||
-|Nombre||||
-|Tipo||||
-|Objetivo||||
-|Fórmula||||
-|Fuente de información||||
-|Unidad de medida||Periodo de medición|2006-2022|
-
-
-
-||Ficha de Indicador|||
-|-----|:-----:|-----|-----|
-||Ejecución por tipo de entidad|||
-|Proceso||Fecha||
-|Nombre||||
-|Tipo||||
-|Objetivo||||
-|Fórmula||||
-|Fuente de información||||
-|Unidad de medida||Periodo de medición|2006-2022|
-
-
->Segundo formato sugerido
 
 |INDICADOR|EJECUCIÓN POR MUNICIPIO|
 |-----|-----|
