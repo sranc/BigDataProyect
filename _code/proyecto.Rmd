@@ -140,12 +140,18 @@ plot_ly(dep_local,labels=~Departamento,values=~Porcentaje,type = "pie") %>%
 ## Sidebar {.sidebar}
 
 # Tablas {data-navmenu="Analisis" data-icon="fa-list"}
+
 ```{r}
 datatable(iris)
 ```
 
 
 
-# Informe
+# Informe {data-icon="fa-file-alt"}
+
+```{r, out.width='100%', out.height="100%" }
+include_graphics("Informe.pdf")
+```
+
 
 
