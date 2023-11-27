@@ -11,6 +11,8 @@ date: |
   | 
   | Noviembre, 2023
 output: pdf_document
+csl: apa.csl
+bibliography: referencias.bib
 lang: es-ES
 toc: TRUE
 ---
@@ -32,23 +34,15 @@ Poder obtener diversos resultados, mediante la aplicación del software R y sus 
 
 # Marco teórico
 
-- Inversión pública. Todo gasto de recursos de origen público destinado a incrementar, mejorar o reponer las existencias de capital físico de dominio público y/o de capital humano, con el objeto de ampliar la capacidad del país para la prestación de servicios o producción de bienes.[^invpub]
-- Fuentes de financiamiento para la Inversión Pública. Se identifican las siguientes fuentes de financiamiento para los proyectos de inversión pública[^fuenfin]:
+- Inversión pública. Todo gasto de recursos de origen público destinado a incrementar, mejorar o reponer las existencias de capital físico de dominio público y/o de capital humano, con el objeto de ampliar la capacidad del país para la prestación de servicios o producción de bienes.[@invpub]
+- Fuentes de financiamiento para la Inversión Pública. Se identifican las siguientes fuentes de financiamiento para los proyectos de inversión pública[@fuenfin]:
   a) Recursos del Tesoro General de la Nación: Administrados por el Gobierno Central que se transfieren a las entidades de la Administración Central y al Fondo Compensatorio de Regalías, para financiar el Presupuesto de Inversión Pública.
   b) Recursos Específicos de las Entidades Públicas: Son recursos que se perciben y administran directamente por las
 entidades públicas y se utilizan para financiar sus Presupuestos de Inversión Pública y que deben ser incorporados en el PGN.
   c) Recursos Externos: Son recursos que el Organo Rector del SNIP contrata de Organismos Financieros Multilaterales, Agencias de Cooperación Internacional y
 Gobiernos, mediante convenios de crédito o donación, y que se transfieren a las entidades del sector público para financiar el Programa de Inversión Pública.
-- Asignación presupuestaria es un intrumento que permite planificar, organizar, dirigir y controlar cada uno de los recursos del Estado, el mismo debe cumplirse de manera obligatoria con el fin de gestionar y programar los ingresos y egresos para el adecuado financiamiento público[^asigpresup].
-- Proyecto. Tiene como objetivo la producción de bienes y servicios destinados a la satisfacción de una necesidad[^proyect].
-
-
-[^invpub]: Normas básicas del Sistema Nacional de Inversión Pública, aprobada con Resolución Suprema
-Nº 216768. Artículo 8
-[^fuenfin]: Normas básicas del Sistema Nacional de Inversión Pública, aprobada con Resolución Suprema
-Nº 216768. Artículo 9
-[^asigpresup]: La asignación presupuestaria y su incidencia en la Administración Pública. Número Publicado el 20 de agosto de 2018. Fundación Dialnet
-[^proyect]: Directrices de Formulación Presupuestaria, y de Planificación e Inversión Pública para el presupuesto gestión 2017. Página 22
+- Asignación presupuestaria es un intrumento que permite planificar, organizar, dirigir y controlar cada uno de los recursos del Estado, el mismo debe cumplirse de manera obligatoria con el fin de gestionar y programar los ingresos y egresos para el adecuado financiamiento público[@asigpresup].
+- Proyecto. Tiene como objetivo la producción de bienes y servicios destinados a la satisfacción de una necesidad[@proyect].
 
 
 
@@ -69,20 +63,20 @@ Las variables consideradas son las siguientes:
 |   7  | provincia             | Provincia en la que se realizó el proyecto                                    | Cadena   |
 |   8  | tipo_proyecto         | Ámbito de aplicación del proyecto                                             | Cadena   |
 |   9  | entidad               | Entidad responsable del proyecto y que recibió los recursos para su ejecución | Cadena   |
-|  10  | tipo_entidad_agrupado | Tipo de entidad agrupada por rubro                                            | Cadena   |
+|  10  | tipo_entidad_ agrupado | Tipo de entidad agrupada por rubro                                            | Cadena   |
 |  11  | sigla_entidad         | Sigla de la entidad                                                           | Cadena   |
 |  12  | tipo_recurso          | Si la fuente de financiamiento es interna o externa                           | Cadena   |
 |  13  | tipo_entidad          | Tipo de entidad según su rol a nivel nacional                                 | Cadena   |
 |  14  | tipo_financiamiento   | Tipo de financiamiento, fuente de los recursos                                | Cadena   |
 |  15  | Presupuesto_inicial   | Presupuesto asignado inicialmente                                             | Numérico |
 |  16  | presupuesto_vigente   | Presupuesto vigente                                                           | Numérico |
-|  17  | presupuesto_ejecutado | Presupuesto ejecutado                                                         | Numérico |
+|  17  | presupuesto_ ejecutado | Presupuesto ejecutado                                                         | Numérico |
 
 # Metodología
 
 ## 1. Indicadores y fichas de indicadores
 
-|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO|
+|INDICADOR 1|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO|
 |-----|-----|
 |Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado|
 |Interpretación|Cuanto se ejecutó en relación a lo programado por año|
@@ -92,7 +86,7 @@ Las variables consideradas son las siguientes:
 |Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
 
 
-|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO|
+|INDICADOR 2|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO|
 |-----|-----|
 |Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por sector económico|
 |Interpretación|Cuanto se ejecutó en relación a lo programado por año y sector económico|
@@ -102,7 +96,7 @@ Las variables consideradas son las siguientes:
 |Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
 
 
-|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN (ESTRUCTURA DEL PRESUPUESTO)|
+|INDICADOR 3|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN (ESTRUCTURA DEL PRESUPUESTO)|
 |-----|-----|
 |Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por sector económico y porcentaje de ejecución|
 |Interpretación|Porcentaje de ejecución de lo programado por año y sector económico|
@@ -112,7 +106,7 @@ Las variables consideradas son las siguientes:
 |Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
 
 
-|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR REGIÓN|
+|INDICADOR 4|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR REGIÓN|
 |-----|-----|
 |Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por región y porcentaje de ejecución|
 |Interpretación|Porcentaje de ejecución de lo programado por año y región|
@@ -122,7 +116,7 @@ Las variables consideradas son las siguientes:
 |Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
 
 
-|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR DEPARTAMENTO|
+|INDICADOR 5|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR DEPARTAMENTO|
 |-----|-----|
 |Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por departamento y porcentaje de ejecución|
 |Interpretación|Porcentaje de ejecución de lo programado por año y departamento|
@@ -132,7 +126,7 @@ Las variables consideradas son las siguientes:
 |Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
 
 
-|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR DEPARTAMENTO Y MUNICIPIO|
+|INDICADOR 6|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR DEPARTAMENTO Y MUNICIPIO|
 |-----|-----|
 |Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por departamento, municipio y porcentaje de ejecución|
 |Interpretación|Porcentaje de ejecución de lo programado por año, departamento y municipio|
@@ -142,7 +136,7 @@ Las variables consideradas son las siguientes:
 |Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
 
 
-|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR TIPO DE SECTOR Y TIPO DE PROYECTO|
+|INDICADOR 7|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR TIPO DE SECTOR Y TIPO DE PROYECTO|
 |-----|-----|
 |Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por tipo de sector y tipo de proyecto|
 |Interpretación|Porcentaje de ejecución de lo programado por año, tipo de sector y tipo de proyecto|
@@ -152,7 +146,7 @@ Las variables consideradas son las siguientes:
 |Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
 
 
-|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR TIPO DE SECTOR Y TIPO DE PROYECTO|
+|INDICADOR 8|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR TIPO DE SECTOR Y TIPO DE PROYECTO|
 |-----|-----|
 |Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por tipo de sector y tipo de proyecto|
 |Interpretación|Porcentaje de ejecución de lo programado por año, tipo de sector y tipo de proyecto|
@@ -162,7 +156,7 @@ Las variables consideradas son las siguientes:
 |Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
 
 
-|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR TIPO DE SECTOR Y SIGLA DE ENTIDAD|
+|INDICADOR 9|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR TIPO DE SECTOR Y SIGLA DE ENTIDAD|
 |-----|-----|
 |Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por tipo de sector y sigla de la entidad|
 |Interpretación|Porcentaje de ejecución de lo programado por año, tipo de sector y sigla de la entidad|
@@ -172,7 +166,7 @@ Las variables consideradas son las siguientes:
 |Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
 
 
-|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR TIPO DE SECTOR Y TIPO DE ENTIDAD|
+|INDICADOR 10|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR TIPO DE SECTOR Y TIPO DE ENTIDAD|
 |-----|-----|
 |Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por tipo de sector y tipo de entidad|
 |Interpretación|Porcentaje de ejecución de lo programado por año, tipo de sector y tipo de entidad|
@@ -182,7 +176,7 @@ Las variables consideradas son las siguientes:
 |Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
 
 
-|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR TIPO DE SECTOR, TIPO DE RECURSO Y TIPO DE FINANCIAMIENTO|
+|INDICADOR 11|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR TIPO DE SECTOR, TIPO DE RECURSO Y TIPO DE FINANCIAMIENTO|
 |-----|-----|
 |Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por tipo de sector, tipo de recurso y tipo de financiamiento|
 |Interpretación|Porcentaje de ejecución de lo programado por año, tipo de sector, tipo de recurso y tipo de financiamiento|
@@ -192,7 +186,7 @@ Las variables consideradas son las siguientes:
 |Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
 
 
-|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR TIPO DE SECTOR Y DEPARTAMENTO|
+|INDICADOR 12|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR TIPO DE SECTOR Y DEPARTAMENTO|
 |-----|-----|
 |Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por tipo de sector y departamento|
 |Interpretación|Porcentaje de ejecución de lo programado por año, tipo de sector y departamento|
@@ -204,9 +198,17 @@ Las variables consideradas son las siguientes:
 
 ## 2. Tratamiento sobre la base de datos
 
+La base de datos tiene 160,795 registros, inicialmente se la tenía en formato Excel, se transformó a CSV, para luego tratarla con SPARK, con excelentes resultados.
+
+No se requirió realizar ningún tratamiento a los registros.
+
 ## 3. Visualización de la información
 
+El presente proyecto se presenta mediante la visualización de un Dashboard y un informe en pdf.
+
 ## 4. Armado de la plataforma
+
+El armado de los gráficos se realizó utilizando la librería Flexdashboard
 
 # Resultados y análisis
 
