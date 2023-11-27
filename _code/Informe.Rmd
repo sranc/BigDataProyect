@@ -82,15 +82,124 @@ Las variables consideradas son las siguientes:
 
 ## 1. Indicadores y fichas de indicadores
 
-|INDICADOR|EJECUCIÓN POR MUNICIPIO|
+|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO|
 |-----|-----|
-|Definición||
-|Interpretación||
-|Límite de cumplimiento||
-|Método de cálculo|Número de municipios/Total ejecución|
-|Fuente de cálculo|Base de datos Presupuestaria|
-|Periodicidad del reporte|Mensual|
-|Responsable|Funcionarios del MEFP|
+|Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado|
+|Interpretación|Cuanto se ejecutó en relación a lo programado por año|
+|Método de cálculo|Ninguo|
+|Fuente de cálculo|Base de datos de Asignación Presupuestaria|
+|Periodicidad del reporte|Anual|
+|Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
+
+
+|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO|
+|-----|-----|
+|Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por sector económico|
+|Interpretación|Cuanto se ejecutó en relación a lo programado por año y sector económico|
+|Método de cálculo|Ninguno|
+|Fuente de cálculo|Base de datos de Asignación Presupuestaria|
+|Periodicidad del reporte|Anual|
+|Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
+
+
+|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN (ESTRUCTURA DEL PRESUPUESTO)|
+|-----|-----|
+|Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por sector económico y porcentaje de ejecución|
+|Interpretación|Porcentaje de ejecución de lo programado por año y sector económico|
+|Método de cálculo|Ninguno|
+|Fuente de cálculo|Base de datos de Asignación Presupuestaria|
+|Periodicidad del reporte|Anual|
+|Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
+
+
+|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR REGIÓN|
+|-----|-----|
+|Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por región y porcentaje de ejecución|
+|Interpretación|Porcentaje de ejecución de lo programado por año y región|
+|Método de cálculo|Ninguno|
+|Fuente de cálculo|Base de datos de Asignación Presupuestaria|
+|Periodicidad del reporte|Anual|
+|Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
+
+
+|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR DEPARTAMENTO|
+|-----|-----|
+|Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por departamento y porcentaje de ejecución|
+|Interpretación|Porcentaje de ejecución de lo programado por año y departamento|
+|Método de cálculo|Ninguno|
+|Fuente de cálculo|Base de datos de Asignación Presupuestaria|
+|Periodicidad del reporte|Anual|
+|Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
+
+
+|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR DEPARTAMENTO Y MUNICIPIO|
+|-----|-----|
+|Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por departamento, municipio y porcentaje de ejecución|
+|Interpretación|Porcentaje de ejecución de lo programado por año, departamento y municipio|
+|Método de cálculo|Ninguno|
+|Fuente de cálculo|Base de datos de Asignación Presupuestaria|
+|Periodicidad del reporte|Anual|
+|Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
+
+
+|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR TIPO DE SECTOR Y TIPO DE PROYECTO|
+|-----|-----|
+|Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por tipo de sector y tipo de proyecto|
+|Interpretación|Porcentaje de ejecución de lo programado por año, tipo de sector y tipo de proyecto|
+|Método de cálculo|Ninguno|
+|Fuente de cálculo|Base de datos de Asignación Presupuestaria|
+|Periodicidad del reporte|Anual|
+|Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
+
+
+|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR TIPO DE SECTOR Y TIPO DE PROYECTO|
+|-----|-----|
+|Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por tipo de sector y tipo de proyecto|
+|Interpretación|Porcentaje de ejecución de lo programado por año, tipo de sector y tipo de proyecto|
+|Método de cálculo|Ninguno|
+|Fuente de cálculo|Base de datos de Asignación Presupuestaria|
+|Periodicidad del reporte|Anual|
+|Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
+
+
+|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR TIPO DE SECTOR Y SIGLA DE ENTIDAD|
+|-----|-----|
+|Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por tipo de sector y sigla de la entidad|
+|Interpretación|Porcentaje de ejecución de lo programado por año, tipo de sector y sigla de la entidad|
+|Método de cálculo|Ninguno|
+|Fuente de cálculo|Base de datos de Asignación Presupuestaria|
+|Periodicidad del reporte|Anual|
+|Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
+
+
+|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR TIPO DE SECTOR Y TIPO DE ENTIDAD|
+|-----|-----|
+|Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por tipo de sector y tipo de entidad|
+|Interpretación|Porcentaje de ejecución de lo programado por año, tipo de sector y tipo de entidad|
+|Método de cálculo|Ninguno|
+|Fuente de cálculo|Base de datos de Asignación Presupuestaria|
+|Periodicidad del reporte|Anual|
+|Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
+
+
+|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR TIPO DE SECTOR, TIPO DE RECURSO Y TIPO DE FINANCIAMIENTO|
+|-----|-----|
+|Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por tipo de sector, tipo de recurso y tipo de financiamiento|
+|Interpretación|Porcentaje de ejecución de lo programado por año, tipo de sector, tipo de recurso y tipo de financiamiento|
+|Método de cálculo|Ninguno|
+|Fuente de cálculo|Base de datos de Asignación Presupuestaria|
+|Periodicidad del reporte|Anual|
+|Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
+
+
+|INDICADOR|PRESUPUESTO PROGRAMADO VS PRESUPUESTO EJECUTADO POR SECTOR ECONÓMICO, % DE EJECUCIÓN POR TIPO DE SECTOR Y DEPARTAMENTO|
+|-----|-----|
+|Definición|Se muestra el presupuesto programado en comparación al presupuesto ejecutado por tipo de sector y departamento|
+|Interpretación|Porcentaje de ejecución de lo programado por año, tipo de sector y departamento|
+|Método de cálculo|Ninguno|
+|Fuente de cálculo|Base de datos de Asignación Presupuestaria|
+|Periodicidad del reporte|Anual|
+|Responsable|Viceministerio de Inversión Pública y Financiamiento Externo|
 
 
 ## 2. Tratamiento sobre la base de datos
