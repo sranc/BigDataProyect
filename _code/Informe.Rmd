@@ -6,7 +6,7 @@ author: |
   | MSc. Alvaro Limber Chirino Gutierrez
 date: |
   | Maestrantes: 
-  | - Ada Milenka Cuento Callisaya
+  | - Ada Milenka Cueto Callisaya
   | - Alexander Ernesto Sucre Casas
   | 
   | Noviembre, 2023
@@ -26,7 +26,19 @@ El presente trabajo presenta el tratamiento de una base de datos, presentando in
 
 # Objetivos
 
+## Objetivos generales
+
+El objetivo es brindar una herramienta eficaz para el análisis y seguimiento de la inversión pública, facilitando la toma de decisiones informadas y estratégicas en políticas gubernamentales y gestión económica a través del desarrollo de un dashboard integral que concentre y presente de manera visual los indicadores clave de la inversión pública en Bolivia. Este proporcionará una plataforma interactiva que permita visualizar de manera clara y accesible los principales datos sobre asignación presupuestaria, ejecución de recursos, distribución por sectores, regiones o entidades, y otros indicadores relevantes.
+
+## Objetivos específicos
+
 Obtener indicadores de asignación presupuestaria y su ejecución, desde distintos puntos de vista.
+
+* Obtener indicadores detallados de asignación presupuestaria: Recopilar datos exhaustivos que describan cómo se asignan los recursos públicos a través de distintas entidades y sectores, brindando una visión amplia de la distribución de fondos.
+* Analizar la ejecución presupuestaria desde múltiples perspectivas: Evaluar la efectividad y el grado de cumplimiento de la ejecución presupuestaria, considerando variables como el cumplimiento de metas, el seguimiento de programas específicos y el uso efectivo de los recursos asignados.
+* Examinar la eficiencia en la asignación de recursos: Valorar la eficiencia en la utilización de los recursos asignados, identificando posibles desviaciones entre la asignación planificada y la ejecución real, y evaluando su impacto en los resultados obtenidos.
+* Generar indicadores comparativos: Desarrollar indicadores comparativos que permitan evaluar y contrastar la asignación y ejecución presupuestaria entre distintos sectores, regiones o períodos temporales para identificar tendencias o áreas de mejora potencial.
+* Proporcionar información integral para la toma de decisiones: Recopilar datos y generar análisis que sirvan como base sólida para la toma de decisiones informadas en políticas públicas, ofreciendo recomendaciones para mejorar la asignación y ejecución eficiente de los recursos públicos.
 
 # Motivación
 
@@ -44,8 +56,6 @@ Gobiernos, mediante convenios de crédito o donación, y que se transfieren a la
 - Asignación presupuestaria es un intrumento que permite planificar, organizar, dirigir y controlar cada uno de los recursos del Estado, el mismo debe cumplirse de manera obligatoria con el fin de gestionar y programar los ingresos y egresos para el adecuado financiamiento público[@asigpresup].
 - Proyecto. Tiene como objetivo la producción de bienes y servicios destinados a la satisfacción de una necesidad[@proyect].
 
-
-
 # Descripción de la base de datos
 
 Datos que detallan el *presupuesto asignado* y la *ejecución presupuestaria* de las diversas entidades dependientes de la Administración Central.
@@ -55,7 +65,7 @@ Las variables consideradas son las siguientes:
 | Nro. | Variable              | Descripción                                                                   |   Tipo   |
 |:----:|-----------------------|-------------------------------------------------------------------------------|:--------:|
 |   1  | gestion               | El año del proyecto                                                           | Cadena   |
-|   2  | periodo               | Periodo semestral, designados como PRIMER PERIODO y SEGUNDO PERIODO           | Cadena   |
+|   2  | periodo               | Dos periodos: Primer periodo gestiones 2006-2013, Segundo periodo gestiones 2014-2022| Cadena   |
 |   3  | sector                | Sector económico, productivo u otra denominación                              | Cadena   |
 |   4  | tipo_sector           | Sector social, productivo, multisectorial e infraestructura                   | Cadena   |
 |   5  | depto                 | Departamento del proyecto, NACIONAL en caso de que sea de beneficio general   | Cadena   |
@@ -198,17 +208,23 @@ Las variables consideradas son las siguientes:
 
 ## 2. Tratamiento sobre la base de datos
 
-La base de datos tiene 160,795 registros, inicialmente se la tenía en formato Excel, se transformó a CSV, para luego tratarla con SPARK, con excelentes resultados.
-
-No se requirió realizar ningún tratamiento a los registros.
+La base de datos, compuesta por 160,795 registros, fue originalmente en formato Excel y posteriormente se convirtió a formato CSV para su procesamiento con SPARK, con resultados altamente satisfactorios. Esta conversión a CSV se llevó a cabo debido a que este formato es más eficiente para manejar grandes volúmenes de datos, resultando en tiempos de lectura y escritura más rápidos en comparación con Excel. Además, CSV es un formato más compatible y universal para su uso en diversas plataformas y herramientas de procesamiento de datos.
+La elección de SPARK como herramienta de procesamiento se basó en su capacidad para manejar grandes conjuntos de datos de manera distribuida y escalable. SPARK está diseñado para trabajar con conjuntos de datos extensos de manera eficiente, aprovechando el procesamiento distribuido en clústeres, lo que permite realizar operaciones complejas en paralelo, acelerando significativamente el análisis y procesamiento de la información.
+Es importante destacar que, a pesar de la magnitud de la base de datos, no fue necesario llevar a cabo ningún tratamiento adicional a los registros, lo que resalta la eficacia del proceso y la calidad de los datos iniciales para su análisis con SPARK.
 
 ## 3. Visualización de la información
 
-El presente proyecto se presenta mediante la visualización de un Dashboard y un informe en pdf.
+Este proyecto se materializa a través de la visualización de un Dashboard, donde se emplean tres herramientas clave: ggplot, plotly y datatables en R.
+
+-	**ggplot**: Es una biblioteca de visualización de datos en R que ofrece una gramática de gráficos, permitiendo la creación de representaciones visuales altamente personalizables. Su enfoque se basa en capas, lo que facilita la construcción de gráficos complejos a partir de componentes simples, brindando un control detallado sobre la estética y estructura de las visualizaciones.
+-	**plotly**: Esta biblioteca permite crear gráficos interactivos en R. Ofrece una amplia gama de gráficos interactivos, desde scatter plots hasta gráficos 3D, que pueden ser manipulados y explorados directamente en el Dashboard. Esto añade una dimensión dinámica y de exploración a las visualizaciones, permitiendo a los usuarios interactuar con los datos.
+-	**datatables**: Es una herramienta que facilita la visualización y manipulación de tablas en R, ofreciendo una amplia gama de funcionalidades para trabajar con datos tabulares. Su integración en el Dashboard permite mostrar y manejar conjuntos de datos de manera eficiente y dinámica, agregando capacidad de filtrado, ordenamiento y búsqueda a las tablas mostradas en la interfaz.
+
+La combinación de estas herramientas en el Dashboard no solo posibilita la representación visual de los datos, sino que también facilita su exploración interactiva y su presentación de manera estructurada y amigable para el usuario final.
 
 ## 4. Armado de la plataforma
 
-El armado de los gráficos se realizó utilizando la librería Flexdashboard
+Los gráficos se crearon utilizando las bibliotecas Flexdashboard y tidyverse. Estas herramientas resultaron fundamentales, ya que permitieron no solo la generación de representaciones visuales, sino también un análisis de datos exhaustivo y eficiente. La combinación de Flexdashboard para la creación del dashboard interactivo y tidyverse para el procesamiento y visualización de datos aseguró una presentación detallada y dinámica de la información.
 
 # Resultados y análisis
 
