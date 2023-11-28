@@ -17,8 +17,8 @@ output:
 
 ```{r setup, include=FALSE}
 rm(list = ls())
+library("flexdashboard")
 pacman::p_load(
-  flexdashboard,
   tidyverse,
   sparklyr,
   readxl,
@@ -30,19 +30,16 @@ pacman::p_load(
   DataExplorer,
   textshape,
   reticulate,
-  tictoc,
-  parquetize,
   knitr,
   DT
 )
 sc <- spark_connect(master = "local")
 proy <- spark_read_csv(sc, name = "proyecto", path = "../_data/Proyectos.csv",memory = F)
+proy <- proy %>% 
+  mutate(presup=ifelse(!is.na(presupuesto_vigente) & presupuesto_vigente > 0,presupuesto_vigente,Presupuesto_inicial))
 ```
 
 # Resumen {data-icon="fa-home"}
-
-```{r}
-```
 
 Row
 -----------------------------------------------------------------------
@@ -65,8 +62,7 @@ valueBox(tot_pres, icon = "fa-dollar-sign",color = "primary")
 
 ```{r}
 tot_vig <- proy %>% 
-  mutate(total=ifelse(!is.na(presupuesto_vigente) & presupuesto_vigente > 0,presupuesto_vigente,Presupuesto_inicial)) %>% 
-  summarize(total = round(sum(total),2)) %>% collect()
+  summarize(total = round(sum(presup),2)) %>% collect()
 valueBox(tot_vig, icon = "fa-chart-line",color = "danger")
 ```
 
@@ -94,7 +90,7 @@ Row
 
 ```{r}
 gest <- proy %>% 
-  select(gestion,inicial=Presupuesto_inicial,vigente=presupuesto_vigente,ejecutado=presupuesto_ejecutado) %>% 
+  select(gestion,inicial=Presupuesto_inicial,vigente=presup,ejecutado=presupuesto_ejecutado) %>% 
   group_by(gestion) %>% 
   summarise(inicial=sum(inicial),vigente=sum(vigente),ejecutado=sum(ejecutado)) %>% 
   arrange(gestion) %>% 
@@ -119,33 +115,252 @@ Row
 ### Cantidad de proyectos por departamento
 
 ```{r}
-dep <- proy %>% count(depto) %>% rename(Departamento=depto,Cantidad=n)
-dep_local <- collect(dep)
-datatable(dep_local,options = list(paging=FALSE,searching=FALSE,info=FALSE))
+dep_n <- proy %>% 
+  count(depto) %>% 
+  rename(Departamento=depto,Cantidad=n) %>% 
+  collect()
+datatable(dep_n,options = list(paging=FALSE,searching=FALSE,info=FALSE))
 ```
 
 ### Porcentaje de proyectos por departamento
 
 ```{r}
-dep <- proy %>% count(depto) %>% mutate(porcentaje = n/sum(n)*100) %>% select(Departamento=depto,Porcentaje=porcentaje)
-dep_local <- collect(dep)
-plot_ly(dep_local,labels=~Departamento,values=~Porcentaje,type = "pie") %>% 
+dep_p <- proy %>% 
+  count(depto) %>% 
+  mutate(porcentaje = n/sum(n)*100) %>% 
+  select(Departamento=depto,Porcentaje=porcentaje) %>%  
+  collect()
+plot_ly(dep_p,labels=~Departamento,values=~Porcentaje,type = "pie") %>% 
   layout(title="Proyectos por departamento",
          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 ```
 
-# Graficos {data-navmenu="Analisis" data-icon="fa-signal"}
-
-## Sidebar {.sidebar}
-
-# Tablas {data-navmenu="Analisis" data-icon="fa-list"}
+# Departamento {data-navmenu="Analisis" data-icon="fa-chart-pie"}
 
 ```{r}
-datatable(iris)
+departamento <- proy %>% 
+  group_by(gestion,depto) %>% 
+  summarise(tot_proy = count(),presup=sum(presup,na.rm = TRUE),ejec=sum(presupuesto_ejecutado,na.rm = TRUE))
+```
+
+Row {data-height=350}
+-----------------------------------------------------------------------
+
+### Numero de Proyectos por Departemento
+
+```{r}
+bar<-ggplot(data=dep_n, aes(x=Departamento, y=Cantidad, fill=Departamento))+
+  geom_bar(stat = "identity")
+
+ggplotly(bar)
 ```
 
 
+### % ejecucion por departamento
+
+```{r}
+dep_pe <- departamento %>% 
+  group_by(Departamento = depto) %>% 
+  summarise(Porcentaje = round(sum(ejec)/sum(presup)*100),2) %>% 
+  arrange(Departamento) %>% 
+  collect()
+
+fig <- plot_ly(dep_pe, x = ~Departamento, y = ~Porcentaje, type = 'scatter', mode = 'lines', fill = 'tozeroy', name = 'Inicial',fillcolor = 'primary')
+
+fig <- fig %>% layout(
+  xaxis = list(title = 'Departamento'),
+  yaxis = list(title = 'Porsentaje de ejecucion'),
+  title = 'Porcentaje de ejecucion por departemento'
+)
+
+fig
+```
+
+Row {data-height=650, .tabset .tabset-fade}
+-----------------------------------------------------------------------
+
+### Barras 
+
+```{r}
+dep_vs<-departamento %>%
+  group_by(depto) %>% 
+  summarise(Presupuestado = sum(presup),Ejecutado = sum(ejec)) %>% 
+  arrange(depto) %>% 
+  collect()
+
+dep_vs1 <- pivot_longer(dep_vs, cols = c(Presupuestado, Ejecutado), names_to = "Tipo", values_to = "Monto")
+
+bar_dep <- ggplot(dep_vs1, aes(x = depto, y = Monto, fill = Tipo))+
+  geom_bar(stat = "identity",position = "dodge")+
+  labs(title = "Presupuesto vs. Ejecución por Departamento", x = "Departamento", y = "Monto")+
+  theme_minimal()+
+  theme(axis.text = element_text(angle = 45,hjust = 1))
+ggplotly(bar_dep)
+```
+
+### Area 
+
+```{r}
+
+fig <- plot_ly(dep_vs, x = ~depto, y = ~Presupuestado, type = 'scatter', mode = 'lines', fill = 'tozeroy', name = 'Presupuestado',fillcolor = 'primary')
+fig <- fig %>% add_trace(y = ~Ejecutado, name = 'Ejecutado',fillcolor = 'danger')
+
+fig <- fig %>% layout(
+  xaxis = list(title = 'Departamento'),
+  yaxis = list(title = 'Monto en millones de dolares'),
+  title = 'Comparación de presupuesto vs ejecutado por gestión'
+)
+
+fig
+```
+
+### Tabla 
+
+```{r}
+datatable(departamento %>% collect())
+```
+
+# Region {data-navmenu="Analisis" data-icon="fa-chart-pie"}
+
+```{r}
+region_d <- proy %>% 
+  group_by(gestion,region) %>% 
+  summarise(tot_proy = count(),presup=sum(presup,na.rm = TRUE),ejec=sum(presupuesto_ejecutado,na.rm = TRUE))
+```
+
+Row {data-height=350}
+-----------------------------------------------------------------------
+
+### Numero de Proyectos por region
+
+```{r}
+num_proy <- region_d %>% 
+  group_by(region) %>%
+  summarise(Cantidad = sum(tot_proy)) %>% 
+  rename(Region = region) %>% 
+  collect()
+
+proy_reg <- ggplot(num_proy, aes(x = Region, y = Cantidad, fill = Region)) +
+  geom_bar(stat = "identity",position = "stack") +
+  labs(title = "Proyectos por region", x = "Region", y = "Cantidad") +
+  coord_flip()+
+  theme_classic()
+ggplotly(proy_reg)
+
+```
+
+
+### % ejecucion por Region
+
+```{r}
+plot_ly(num_proy,labels=~Region,values=~Cantidad,type = "pie", hole=0.4 ) %>% 
+  layout(title="Proyectos por Región",
+         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+```
+
+Row {data-height=650, .tabset .tabset-fade}
+-----------------------------------------------------------------------
+
+### Barras 
+
+```{r}
+barra_reg <- ggplot(region_d, aes(x = gestion, y = presup + ejec, fill = region)) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(title = "Presupuesto y Ejecución por Región",
+       x = "Gestión", y = "Ejecución") +
+  theme_minimal()
+ggplotly(barra_reg)
+```
+
+### Densidad 
+
+```{r}
+area_reg <- ggplot(region_d, aes(x = ejec)) +
+  geom_density(aes(fill = gestion), alpha = 0.5) +
+  labs(title = "Presupuesto y Ejecución por Región",
+       x = "Ejecución") +
+  theme_minimal()
+ggplotly(area_reg)
+```
+
+### Tabla 
+
+```{r}
+datatable(region_d %>% collect())
+```
+
+# Region {data-navmenu="Analisis" data-icon="fa-chart-pie"}
+
+```{r}
+sector_tipo <- proy %>% 
+  group_by(gestion,tipo_sector) %>% 
+  summarise(tot_proy = count(),presup=sum(presup,na.rm = TRUE),ejec=sum(presupuesto_ejecutado,na.rm = TRUE))
+```
+
+Row {data-height=350}
+-----------------------------------------------------------------------
+
+### Numero de Proyectos por region
+
+```{r}
+num_proy <- sector_tipo %>% 
+  group_by(tipo_sector) %>%
+  summarise(Cantidad = sum(tot_proy)) %>% 
+  collect()
+
+proy_reg <- ggplot(num_proy, aes(x = tipo_sector, y = Cantidad, fill = tipo_sector)) +
+  geom_bar(stat = "identity",position = "stack") +
+  labs(title = "Proyectos por tipo de sector", x = "tipo_sector", y = "Cantidad") +
+  coord_flip()+
+  theme_classic()
+ggplotly(proy_reg)
+
+```
+
+
+### % ejecucion por Region
+
+```{r}
+plot_ly(num_proy,labels=~tipo_sector,values=~Cantidad,type = "pie", hole=0.4 ) %>% 
+  layout(title="Proyectos por tipo de sector",
+         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+```
+
+Row {data-height=650, .tabset .tabset-fade}
+-----------------------------------------------------------------------
+
+### Barras 
+
+```{r}
+barra_reg <- ggplot(sector_tipo, aes(x = gestion, y = ejec, fill = tipo_sector)) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(title = "Presupuesto y Ejecución por tipo de sector y Gestión",
+       x = "Gestión", y = "Ejecución") +
+  theme_minimal()
+ggplotly(barra_reg)
+```
+
+### Area 
+
+```{r}
+area_reg <- ggplot(sector_tipo, aes(x = ejec)) +
+  geom_density(aes(fill = gestion), alpha = 0.5) +
+  labs(title = "Presupuesto y Ejecución por Gestión (Densidad)",
+       x = "Ejecución") +
+  theme_minimal()
+ggplotly(area_reg)
+```
+
+### Tabla 
+
+```{r}
+datatable(sector_tipo %>% collect())
+```
 
 # Informe {data-icon="fa-file-alt"}
 
