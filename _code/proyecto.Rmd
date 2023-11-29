@@ -192,12 +192,20 @@ ggplotly(barra_reg)
 ### Area 
 
 ```{r}
-area_reg <- ggplot(sector_tipo, aes(x = ejec)) +
-  geom_density(aes(fill = gestion), alpha = 0.5) +
-  labs(title = "Ejecución por Gestión (Densidad)",
-       x = "Ejecución") +
+tendencia <- sector_tipo %>% 
+  pivot_longer(cols = c(presup, ejec),
+               names_to = "Tipo",
+               values_to = "Valor")
+
+tendencia_graf <- ggplot(tendencia, aes(x = gestion, y = Valor, color = Tipo, group = Tipo)) +
+  geom_line() +
+  labs(title = "Gráfico de Tendencias Presupuesto vs Ejecución",
+       x = "Gestión",
+       y = "Valor") +
+  scale_color_manual(values = c("presup" = "blue", "ejec" = "red")) +  # Cambiar colores si deseas
   theme_minimal()
-ggplotly(area_reg)
+
+ggplotly(tendencia_graf)
 ```
 
 ### Tabla 
@@ -221,10 +229,10 @@ Row {data-height=350}
 
 ```{r}
 bar<-ggplot(data=dep_n, aes(x=Departamento, y=Cantidad, fill=Departamento))+
-  geom_bar(stat = "identity")
+  geom_bar(stat = "identity")+
+  coord_flip()
 
-ggplotly(bar)
-
+ggplotly(bar) %>% layout(showlegend = FALSE)
 
 ```
 
@@ -237,16 +245,6 @@ dep_pe <- departamento %>%
   summarise(Porcentaje = round(sum(ejec)/sum(presup)*100),2) %>% 
   arrange(Departamento) %>% 
   collect()
-
-fig <- plot_ly(dep_pe, x = ~Departamento, y = ~Porcentaje, type = 'scatter', mode = 'lines', fill = 'tozeroy', name = 'Inicial',fillcolor = 'primary')
-
-fig <- fig %>% layout(
-  xaxis = list(title = 'Departamento'),
-  yaxis = list(title = 'Porsentaje de ejecucion'),
-  title = 'Porcentaje de ejecucion por departemento'
-)
-
-fig
 
 plot_ly(dep_pe,labels=~Departamento,values=~Porcentaje,type = "pie" ) %>% 
   layout(title="% Ejecucion por Departamento",
@@ -456,6 +454,27 @@ Row {data-height=350}
 ### Numero de Proyectos por financiamiento
 
 ```{r}
+
+recurso <- proy %>% 
+  group_by(tipo_recurso) %>% 
+  summarise(tot_proy = count(),presup=sum(presup,na.rm = TRUE),ejec=sum(presupuesto_ejecutado,na.rm = TRUE)) %>% 
+  collect()
+
+fig <- plot_ly()
+fig <- fig %>% 
+  add_pie(data = recurso, labels = ~tipo_recurso, values = ~tot_proy, name = "Total", domain = list(x = c(0, 0.4), y = c(0.4, 1)))
+fig <- fig %>% 
+  add_pie(data = recurso, labels = ~tipo_recurso, values = ~presup, name = "Presupuestado", domain = list(x = c(0.6, 1), y = c(0.4, 1)))
+
+fig <- fig %>% 
+  add_pie(data = recurso, labels = ~tipo_recurso, values = ~ejec, name = "Ejecutado", domain = list(x = c(0.25, 0.75), y = c(0, 0.6)))
+
+fig <- fig %>% layout(title = "Financiamiento por recurso interno o externo", showlegend = F,
+         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+fig
+
 num_proy <- financiamiento %>% 
   group_by(tipo_financiamiento) %>%
   summarise(Cantidad = sum(tot_proy)) %>% 
