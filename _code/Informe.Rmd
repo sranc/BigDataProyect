@@ -232,6 +232,8 @@ Los resultados revelan una marcada variabilidad en la ejecución presupuestaria,
 
 Estos hallazgos subrayan la necesidad imperante de estrategias más adaptables que permitan optimizar el uso de recursos y se ajusten a los cambios presentes en el entorno. Destacan la importancia crucial de las herramientas visuales, como el dashboard desarrollado, que han permitido identificar patrones clave en la asignación y ejecución presupuestaria.
 
+En el análisis de la inversión pública en Bolivia, se evidencia una ejecución presupuestaria variable entre sectores y regiones, con sectores que muestran una capacidad superior en la ejecución de recursos. Las discrepancias entre presupuesto planificado y ejecutado señalan áreas potenciales de ineficiencia en la gestión de fondos. Es evidente la necesidad de estrategias más flexibles para adaptarse a cambios y mejorar la utilización de recursos. Además, el uso de herramientas visuales, como el dashboard desarrollado, brinda la capacidad de identificar patrones significativos en la asignación y ejecución presupuestaria, proporcionando así una base sólida para la toma de decisiones más informadas y efectivas en políticas públicas.
+
 # Conclusiones
 
 El análisis resalta la importancia fundamental de las herramientas de visualización de datos, como el dashboard que ha sido desarrollado. Estas herramientas son clave para comprender y optimizar la gestión de la inversión pública, ya que ofrecen representaciones dinámicas y accesibles de la asignación presupuestaria. Permiten descubrir patrones significativos en la ejecución de recursos según el sector, la región y el tipo de entidad.
