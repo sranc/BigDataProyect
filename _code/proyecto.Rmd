@@ -136,7 +136,77 @@ plot_ly(dep_p,labels=~Departamento,values=~Porcentaje,type = "pie") %>%
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 ```
 
-# Departamento {data-navmenu="Analisis" data-icon="fa-chart-pie"}
+# Sector {data-navmenu="Analisis" data-icon="fa-business-time"}
+
+```{r}
+sector_tipo <- proy %>% 
+  group_by(gestion,tipo_sector) %>% 
+  summarise(tot_proy = count(),presup=sum(presup,na.rm = TRUE),ejec=sum(presupuesto_ejecutado,na.rm = TRUE))
+```
+
+Row {data-height=350}
+-----------------------------------------------------------------------
+
+### Numero de Proyectos por tipo de Sector
+
+```{r}
+num_proy <- sector_tipo %>% 
+  group_by(tipo_sector) %>%
+  summarise(Cantidad = sum(tot_proy)) %>% 
+  collect()
+
+proy_reg <- ggplot(num_proy, aes(x = tipo_sector, y = Cantidad, fill = tipo_sector)) +
+  geom_bar(stat = "identity",position = "stack") +
+  labs(title = "Proyectos por tipo de sector", x = "tipo_sector", y = "Cantidad") +
+  coord_flip()+
+  theme_classic()
+ggplotly(proy_reg)
+
+```
+
+
+### % ejecucion por tipo de Sector
+
+```{r}
+plot_ly(num_proy,labels=~tipo_sector,values=~Cantidad,type = "pie", hole=0.4 ) %>% 
+  layout(title="Proyectos por tipo de sector",
+         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+```
+
+Row {data-height=650, .tabset .tabset-fade}
+-----------------------------------------------------------------------
+
+### Barras 
+
+```{r}
+barra_reg <- ggplot(sector_tipo, aes(x = gestion, y = ejec, fill = tipo_sector)) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(title = "Ejecución por tipo de sector y Gestión",
+       x = "Gestión", y = "Ejecución") +
+  theme_minimal()
+ggplotly(barra_reg)
+```
+
+### Area 
+
+```{r}
+area_reg <- ggplot(sector_tipo, aes(x = ejec)) +
+  geom_density(aes(fill = gestion), alpha = 0.5) +
+  labs(title = "Ejecución por Gestión (Densidad)",
+       x = "Ejecución") +
+  theme_minimal()
+ggplotly(area_reg)
+```
+
+### Tabla 
+
+```{r}
+datatable(sector_tipo %>% collect())
+```
+
+# Departamento {data-navmenu="Analisis" data-icon="fa-city"}
 
 ```{r}
 departamento <- proy %>% 
@@ -154,6 +224,8 @@ bar<-ggplot(data=dep_n, aes(x=Departamento, y=Cantidad, fill=Departamento))+
   geom_bar(stat = "identity")
 
 ggplotly(bar)
+
+
 ```
 
 
@@ -175,6 +247,11 @@ fig <- fig %>% layout(
 )
 
 fig
+
+plot_ly(dep_pe,labels=~Departamento,values=~Porcentaje,type = "pie" ) %>% 
+  layout(title="% Ejecucion por Departamento",
+         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 ```
 
 Row {data-height=650, .tabset .tabset-fade}
@@ -221,7 +298,7 @@ fig
 datatable(departamento %>% collect())
 ```
 
-# Region {data-navmenu="Analisis" data-icon="fa-chart-pie"}
+# Region {data-navmenu="Analisis" data-icon="fa-map-marked"}
 
 ```{r}
 region_d <- proy %>% 
@@ -292,40 +369,43 @@ ggplotly(area_reg)
 datatable(region_d %>% collect())
 ```
 
-# Region {data-navmenu="Analisis" data-icon="fa-chart-pie"}
+# Tipo de entidad {data-navmenu="Analisis" data-icon="fa-suit-case"}
 
 ```{r}
-sector_tipo <- proy %>% 
-  group_by(gestion,tipo_sector) %>% 
+tipo_entidad_r <- proy %>% 
+  group_by(gestion,tipo_entidad) %>% 
   summarise(tot_proy = count(),presup=sum(presup,na.rm = TRUE),ejec=sum(presupuesto_ejecutado,na.rm = TRUE))
 ```
 
 Row {data-height=350}
 -----------------------------------------------------------------------
 
-### Numero de Proyectos por region
+### Numero de Proyectos por tipo de entidad 
 
 ```{r}
-num_proy <- sector_tipo %>% 
-  group_by(tipo_sector) %>%
+num_proy <- tipo_entidad_r %>% 
+  group_by(tipo_entidad) %>%
   summarise(Cantidad = sum(tot_proy)) %>% 
+  arrange(desc(Cantidad)) %>% 
+  head(15) %>% 
   collect()
 
-proy_reg <- ggplot(num_proy, aes(x = tipo_sector, y = Cantidad, fill = tipo_sector)) +
+proy_reg <- ggplot(num_proy, aes(x = tipo_entidad, y = Cantidad, fill = tipo_entidad)) +
   geom_bar(stat = "identity",position = "stack") +
-  labs(title = "Proyectos por tipo de sector", x = "tipo_sector", y = "Cantidad") +
+  labs(title = "Proyectos por tipo de entidad", x = "Tipo entidad", y = "Cantidad") +
   coord_flip()+
   theme_classic()
-ggplotly(proy_reg)
+ggplotly(proy_reg) %>% layout(showlegend = FALSE)
 
 ```
 
 
-### % ejecucion por Region
+### % ejecucion por tipo de entidad
 
 ```{r}
-plot_ly(num_proy,labels=~tipo_sector,values=~Cantidad,type = "pie", hole=0.4 ) %>% 
-  layout(title="Proyectos por tipo de sector",
+num_proy_1 <- num_proy %>% head(10)
+plot_ly(num_proy_1,labels=~tipo_entidad,values=~Cantidad,type = "pie", hole=0.4 ) %>% 
+  layout(title="Proyectos por tipo de entidad",
          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 
@@ -337,20 +417,20 @@ Row {data-height=650, .tabset .tabset-fade}
 ### Barras 
 
 ```{r}
-barra_reg <- ggplot(sector_tipo, aes(x = gestion, y = ejec, fill = tipo_sector)) +
+barra_reg <- ggplot(tipo_entidad_r, aes(x = gestion, y = ejec, fill = tipo_entidad)) +
   geom_bar(stat = "identity", position = "stack") +
-  labs(title = "Presupuesto y Ejecución por tipo de sector y Gestión",
+  labs(title = "Ejecución por tipo de entidad",
        x = "Gestión", y = "Ejecución") +
   theme_minimal()
 ggplotly(barra_reg)
 ```
 
-### Area 
+### Densidad 
 
 ```{r}
-area_reg <- ggplot(sector_tipo, aes(x = ejec)) +
-  geom_density(aes(fill = gestion), alpha = 0.5) +
-  labs(title = "Presupuesto y Ejecución por Gestión (Densidad)",
+area_reg <- ggplot(tipo_entidad_r, aes(x = ejec)) +
+  geom_density(aes(fill = tipo_entidad), alpha = 0.5) +
+  labs(title = "Ejecución por tipo de entidad",
        x = "Ejecución") +
   theme_minimal()
 ggplotly(area_reg)
@@ -359,8 +439,84 @@ ggplotly(area_reg)
 ### Tabla 
 
 ```{r}
-datatable(sector_tipo %>% collect())
+datatable(tipo_entidad_r %>% collect())
 ```
+
+# Financiamiento {data-navmenu="Analisis" data-icon="fa-money-bill-wave"}
+
+```{r}
+financiamiento <- proy %>% 
+  group_by(gestion,tipo_financiamiento) %>% 
+  summarise(tot_proy = count(),presup=sum(presup,na.rm = TRUE),ejec=sum(presupuesto_ejecutado,na.rm = TRUE))
+```
+
+Row {data-height=350}
+-----------------------------------------------------------------------
+
+### Numero de Proyectos por financiamiento
+
+```{r}
+num_proy <- financiamiento %>% 
+  group_by(tipo_financiamiento) %>%
+  summarise(Cantidad = sum(tot_proy)) %>% 
+  collect()
+
+proy_reg <- ggplot(num_proy, aes(x = tipo_financiamiento, y = Cantidad, fill = tipo_financiamiento)) +
+  geom_bar(stat = "identity",position = "stack") +
+  labs(title = "Proyectos por financiamiento", x = "Financiamiento", y = "Cantidad") +
+  coord_flip()+
+  theme_classic()
+ggplotly(proy_reg)
+
+```
+
+
+### % ejecucion por financiamiento
+
+```{r}
+plot_ly(num_proy,labels=~tipo_financiamiento,values=~Cantidad,type = "pie") %>% 
+  layout(title="Proyectos por financiamiento",
+         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+```
+
+Row {data-height=650, .tabset .tabset-fade}
+-----------------------------------------------------------------------
+
+### Barras 
+
+```{r}
+barra_reg <- ggplot(financiamiento, aes(x = gestion, y = presup + ejec, fill = tipo_financiamiento)) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(title = "Presupuesto y Ejecución por financiamiento",
+       x = "Gestión", y = "Ejecución") +
+  theme_minimal()
+ggplotly(barra_reg)
+```
+
+### Densidad 
+
+```{r}
+area_reg <- ggplot(financiamiento, aes(x = ejec)) +
+  geom_density(aes(fill = tipo_financiamiento), alpha = 0.5) +
+  labs(title = "Presupuesto y Ejecución por financiamiento",
+       x = "Ejecución") +
+  theme_minimal()
+ggplotly(area_reg)
+```
+
+### Tabla 
+
+```{r}
+datatable(financiamiento %>% collect())
+```
+
+# Grafico Dinamico
+```{r}
+
+```
+
 
 # Informe {data-icon="fa-file-alt"}
 
