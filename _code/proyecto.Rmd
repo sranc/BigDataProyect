@@ -1,5 +1,5 @@
 ---
-title: "Inversion publica 2006-2022"
+title: "Inversión pública 2006-2022"
 author: "Ada Cueto - Alexander Sucre"
 output: 
   flexdashboard::flex_dashboard:
@@ -18,6 +18,7 @@ output:
 ```{r setup, include=FALSE}
 rm(list = ls())
 library("flexdashboard")
+library(crosstalk)
 pacman::p_load(
   tidyverse,
   sparklyr,
@@ -147,7 +148,7 @@ sector_tipo <- proy %>%
 Row {data-height=350}
 -----------------------------------------------------------------------
 
-### Numero de Proyectos por tipo de Sector
+### Número de Proyectos por tipo de Sector
 
 ```{r}
 num_proy <- sector_tipo %>% 
@@ -165,7 +166,7 @@ ggplotly(proy_reg)
 ```
 
 
-### % ejecucion por tipo de Sector
+### % ejecución por tipo de Sector
 
 ```{r}
 plot_ly(num_proy,labels=~tipo_sector,values=~Cantidad,type = "pie", hole=0.4 ) %>% 
@@ -189,7 +190,7 @@ barra_reg <- ggplot(sector_tipo, aes(x = gestion, y = ejec, fill = tipo_sector))
 ggplotly(barra_reg)
 ```
 
-### Area 
+### Área 
 
 ```{r}
 area_reg <- ggplot(sector_tipo, aes(x = ejec)) +
@@ -217,7 +218,7 @@ departamento <- proy %>%
 Row {data-height=350}
 -----------------------------------------------------------------------
 
-### Numero de Proyectos por Departemento
+### Número de Proyectos por Departamento
 
 ```{r}
 bar<-ggplot(data=dep_n, aes(x=Departamento, y=Cantidad, fill=Departamento))+
@@ -229,7 +230,7 @@ ggplotly(bar)
 ```
 
 
-### % ejecucion por departamento
+### % ejecución por departamento
 
 ```{r}
 dep_pe <- departamento %>% 
@@ -276,7 +277,7 @@ bar_dep <- ggplot(dep_vs1, aes(x = depto, y = Monto, fill = Tipo))+
 ggplotly(bar_dep)
 ```
 
-### Area 
+### Área 
 
 ```{r}
 
@@ -298,7 +299,7 @@ fig
 datatable(departamento %>% collect())
 ```
 
-# Region {data-navmenu="Analisis" data-icon="fa-map-marked"}
+# Región {data-navmenu="Análisis" data-icon="fa-map-marked"}
 
 ```{r}
 region_d <- proy %>% 
@@ -309,7 +310,7 @@ region_d <- proy %>%
 Row {data-height=350}
 -----------------------------------------------------------------------
 
-### Numero de Proyectos por region
+### Número de Proyectos por región
 
 ```{r}
 num_proy <- region_d %>% 
@@ -328,7 +329,7 @@ ggplotly(proy_reg)
 ```
 
 
-### % ejecucion por Region
+### % ejecución por Región
 
 ```{r}
 plot_ly(num_proy,labels=~Region,values=~Cantidad,type = "pie", hole=0.4 ) %>% 
@@ -369,7 +370,7 @@ ggplotly(area_reg)
 datatable(region_d %>% collect())
 ```
 
-# Tipo de entidad {data-navmenu="Analisis" data-icon="fa-suit-case"}
+# Tipo de entidad {data-navmenu="Análisis" data-icon="fa-suit-case"}
 
 ```{r}
 tipo_entidad_r <- proy %>% 
@@ -380,7 +381,7 @@ tipo_entidad_r <- proy %>%
 Row {data-height=350}
 -----------------------------------------------------------------------
 
-### Numero de Proyectos por tipo de entidad 
+### Número de Proyectos por tipo de entidad 
 
 ```{r}
 num_proy <- tipo_entidad_r %>% 
@@ -400,7 +401,7 @@ ggplotly(proy_reg) %>% layout(showlegend = FALSE)
 ```
 
 
-### % ejecucion por tipo de entidad
+### % ejecución por tipo de entidad
 
 ```{r}
 num_proy_1 <- num_proy %>% head(10)
@@ -453,7 +454,7 @@ financiamiento <- proy %>%
 Row {data-height=350}
 -----------------------------------------------------------------------
 
-### Numero de Proyectos por financiamiento
+### Número de Proyectos por financiamiento
 
 ```{r}
 num_proy <- financiamiento %>% 
@@ -471,7 +472,7 @@ ggplotly(proy_reg)
 ```
 
 
-### % ejecucion por financiamiento
+### % ejecución por financiamiento
 
 ```{r}
 plot_ly(num_proy,labels=~tipo_financiamiento,values=~Cantidad,type = "pie") %>% 
@@ -512,8 +513,20 @@ ggplotly(area_reg)
 datatable(financiamiento %>% collect())
 ```
 
-# Grafico Dinamico
+# Gráfico Dinámico
+
+### Gráfico por departamentos de cantidad de proyectos con filtro por año
 ```{r}
+tot_proy <- proy %>% count(gestion, depto) %>% rename(total=n) %>% collect()
+tot_proy$depto <- as.factor(tot_proy$depto)
+tot_proy$gestion <- as.numeric(tot_proy$gestion)
+tot_proy$total <- as.numeric(tot_proy$total)
+
+tx <- highlight_key(tot_proy)
+
+x <- filter_select("id", "-  Seleccione:", tx, ~gestion, multiple = FALSE)
+p <- plot_ly(tx, x = ~depto, y = ~ total , type="bar" , mode="markers") %>% highlight("plotly_click")# %>% add_markers() 
+bscols(x,p,widths = c(3, 9))
 
 ```
 
