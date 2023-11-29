@@ -22,7 +22,7 @@ toc: TRUE
 
 La importancia de la inversión pública, radica en que la adecuada asignación de esta permite el crecimiento de los distintos sectores económico productivos, mediante la canalización de dichos recursos vía las diversas entidades de la *Administración Central*, *Instituciones descentralizadas*, *Gobernaciones*, *Municipalidades*, *Instituciones de Seguridad Social*, *Empresas públicas*, *Instituciones públicas financieras* y *Universidades*.
 
-El presente trabajo presenta el tratamiento de una base de datos, presentando información relevante respecto al cumplimiento de la asignación presupuestaria.
+El presente trabajo presenta el tratamiento de una base de datos, presentando información relevante respecto al cumplimiento de la asignación presupuestaria en el Estado Plurinacional de Bolivia.
 
 # Objetivos
 
@@ -42,19 +42,19 @@ Obtener indicadores de asignación presupuestaria y su ejecución, desde distint
 
 # Motivación
 
-Poder obtener diversos resultados, mediante la aplicación del software R y sus diversas librerías, demostrando lo útil de uso de recursos tecnológicos para generar información relevante.
+Es de vital importancia el poder tener información precisa a partir de los datos disponibles, para lo que se aprovecha las diversas herramientas de software para obtener varios resultados, los que permiten ver de manera más clara el comportamiento de las variables de estudio. Todo esto se logra mediante la aplicación del software R y sus librerías, demostrando lo útil del uso de recursos tecnológicos para generar información relevante.
 
 # Marco teórico
 
-- Inversión pública. Todo gasto de recursos de origen público destinado a incrementar, mejorar o reponer las existencias de capital físico de dominio público y/o de capital humano, con el objeto de ampliar la capacidad del país para la prestación de servicios o producción de bienes.[@invpub]
-- Fuentes de financiamiento para la Inversión Pública. Se identifican las siguientes fuentes de financiamiento para los proyectos de inversión pública[@fuenfin]:
-  a) Recursos del Tesoro General de la Nación: Administrados por el Gobierno Central que se transfieren a las entidades de la Administración Central y al Fondo Compensatorio de Regalías, para financiar el Presupuesto de Inversión Pública.
-  b) Recursos Específicos de las Entidades Públicas: Son recursos que se perciben y administran directamente por las
+- ***Inversión pública.*** Todo gasto de recursos de origen público destinado a incrementar, mejorar o reponer las existencias de capital físico de dominio público y/o de capital humano, con el objeto de ampliar la capacidad del país para la prestación de servicios o producción de bienes.[@invpub]
+- ***Fuentes de financiamiento para la Inversión Pública.*** Se identifican las siguientes fuentes de financiamiento para los proyectos de inversión pública[@fuenfin]:
+  a) ***Recursos del Tesoro General de la Nación***: Administrados por el Gobierno Central que se transfieren a las entidades de la Administración Central y al Fondo Compensatorio de Regalías, para financiar el Presupuesto de Inversión Pública.
+  b) ***Recursos Específicos de las Entidades Públicas***: Son recursos que se perciben y administran directamente por las
 entidades públicas y se utilizan para financiar sus Presupuestos de Inversión Pública y que deben ser incorporados en el PGN.
-  c) Recursos Externos: Son recursos que el Organo Rector del SNIP contrata de Organismos Financieros Multilaterales, Agencias de Cooperación Internacional y
+  c) ***Recursos Externos***: Son recursos que el Órgano Rector del SNIP contrata de Organismos Financieros Multilaterales, Agencias de Cooperación Internacional y
 Gobiernos, mediante convenios de crédito o donación, y que se transfieren a las entidades del sector público para financiar el Programa de Inversión Pública.
-- Asignación presupuestaria es un intrumento que permite planificar, organizar, dirigir y controlar cada uno de los recursos del Estado, el mismo debe cumplirse de manera obligatoria con el fin de gestionar y programar los ingresos y egresos para el adecuado financiamiento público[@asigpresup].
-- Proyecto. Tiene como objetivo la producción de bienes y servicios destinados a la satisfacción de una necesidad[@proyect].
+- ***Asignación presupuestaria*** es un instrumento que permite planificar, organizar, dirigir y controlar cada uno de los recursos del Estado, el mismo debe cumplirse de manera obligatoria con el fin de gestionar y programar los ingresos y egresos para el adecuado financiamiento público[@asigpresup].
+- ***Proyecto.*** Tiene como objetivo la producción de bienes y servicios destinados a la satisfacción de una necesidad[@proyect].
 
 # Descripción de la base de datos
 
@@ -208,7 +208,7 @@ Las variables consideradas son las siguientes:
 
 ## 2. Tratamiento sobre la base de datos
 
-La base de datos, compuesta por 160,795 registros, fue originalmente en formato Excel y posteriormente se convirtió a formato CSV para su procesamiento con SPARK, con resultados altamente satisfactorios. Esta conversión a CSV se llevó a cabo debido a que este formato es más eficiente para manejar grandes volúmenes de datos, resultando en tiempos de lectura y escritura más rápidos en comparación con Excel. Además, CSV es un formato más compatible y universal para su uso en diversas plataformas y herramientas de procesamiento de datos.
+La base de datos, compuesta por 160,795 registros, fue concebida originalmente en formato Excel y posteriormente se convirtió a formato CSV para su procesamiento con SPARK, con resultados altamente satisfactorios. Esta conversión a CSV se llevó a cabo debido a que este formato es más eficiente para manejar grandes volúmenes de datos, resultando en tiempos de lectura y escritura más rápidos en comparación con Excel. Además, CSV es un formato más compatible y universal para su uso en diversas plataformas y herramientas de procesamiento de datos.
 La elección de SPARK como herramienta de procesamiento se basó en su capacidad para manejar grandes conjuntos de datos de manera distribuida y escalable. SPARK está diseñado para trabajar con conjuntos de datos extensos de manera eficiente, aprovechando el procesamiento distribuido en clústeres, lo que permite realizar operaciones complejas en paralelo, acelerando significativamente el análisis y procesamiento de la información.
 Es importante destacar que, a pesar de la magnitud de la base de datos, no fue necesario llevar a cabo ningún tratamiento adicional a los registros, lo que resalta la eficacia del proceso y la calidad de los datos iniciales para su análisis con SPARK.
 
@@ -228,7 +228,22 @@ Los gráficos se crearon utilizando las bibliotecas Flexdashboard y tidyverse. E
 
 # Resultados y análisis
 
-# Conclusiones y recomendaciones
+Los resultados revelan una marcada variabilidad en la ejecución presupuestaria, evidenciando notables diferencias en la efectividad de asignación y uso de recursos entre distintos sectores y regiones. Se destacan desviaciones significativas entre el presupuesto planificado y el ejecutado, indicando posibles ineficiencias en la gestión de fondos.
+
+Estos hallazgos subrayan la necesidad imperante de estrategias más adaptables que permitan optimizar el uso de recursos y se ajusten a los cambios presentes en el entorno. Destacan la importancia crucial de las herramientas visuales, como el dashboard desarrollado, que han permitido identificar patrones clave en la asignación y ejecución presupuestaria.
+
+# Conclusiones
+
+El análisis resalta la importancia fundamental de las herramientas de visualización de datos, como el dashboard que ha sido desarrollado. Estas herramientas son clave para comprender y optimizar la gestión de la inversión pública, ya que ofrecen representaciones dinámicas y accesibles de la asignación presupuestaria. Permiten descubrir patrones significativos en la ejecución de recursos según el sector, la región y el tipo de entidad.
+
+Además, la capacidad de explorar de manera interactiva los indicadores de inversión establece una base sólida para la toma de decisiones informadas en políticas públicas. Esto implica identificar áreas de mejora en la asignación y ejecución eficiente de los recursos públicos. El uso de estas herramientas promueve la transparencia, facilita la rendición de cuentas y subraya la necesidad continua de emplear tecnologías que permitan una evaluación precisa y estratégica de la inversión pública para fomentar un desarrollo sostenible.
+
+# Recomendaciones
+
+Es fundamental expandir y enriquecer las funcionalidades del dashboard, incorporando una gama más amplia de detalles sobre la asignación y ejecución presupuestaria. Esto podría incluir la integración de datos más específicos que abarquen diferentes niveles de desglose, como subdivisiones por programas, proyectos o incluso partidas individuales. Asimismo, considerar la inclusión de métricas clave para evaluar el rendimiento, como la eficiencia en el uso de los fondos, el progreso de los proyectos y la correlación entre la asignación presupuestaria y los resultados alcanzados.
+
+Para garantizar que estas mejoras sean realmente útiles y relevantes, es esencial recopilar retroalimentación de los usuarios. Esto podría lograrse mediante encuestas, entrevistas o grupos focales con los principales usuarios del dashboard, como responsables de políticas públicas, analistas de datos y gestores de presupuestos. Esta retroalimentación permitirá entender mejor las necesidades específicas, identificar posibles áreas de mejora y obtener ideas para funcionalidades adicionales que serían valiosas para mejorar la toma de decisiones.
+Además, establecer un proceso continuo de retroalimentación y actualización garantizará que el dashboard evolucione en respuesta a las cambiantes necesidades y demandas de los usuarios. La colaboración estrecha con los usuarios en la fase de desarrollo y prueba de las nuevas funcionalidades también sería beneficioso para asegurar su relevancia y utilidad práctica.
 
 # Referencias
 
