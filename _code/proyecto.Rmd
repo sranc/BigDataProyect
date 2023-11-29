@@ -1,5 +1,5 @@
 ---
-title: "Inversion publica 2006-2022"
+title: "Inversión pública 2006-2022"
 author: "Ada Cueto - Alexander Sucre"
 output: 
   flexdashboard::flex_dashboard:
@@ -20,6 +20,7 @@ rm(list = ls())
 library("flexdashboard")
 pacman::p_load(
   tidyverse,
+  crosstalk,
   sparklyr,
   readxl,
   dplyr,
@@ -136,7 +137,7 @@ plot_ly(dep_p,labels=~Departamento,values=~Porcentaje,type = "pie") %>%
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 ```
 
-# Sector {data-navmenu="Analisis" data-icon="fa-business-time"}
+# Sector {data-navmenu="Análisis" data-icon="fa-business-time"}
 
 ```{r}
 sector_tipo <- proy %>% 
@@ -147,7 +148,7 @@ sector_tipo <- proy %>%
 Row {data-height=350}
 -----------------------------------------------------------------------
 
-### Numero de Proyectos por tipo de Sector
+### Número de Proyectos por tipo de Sector
 
 ```{r}
 num_proy <- sector_tipo %>% 
@@ -165,7 +166,7 @@ ggplotly(proy_reg)
 ```
 
 
-### % ejecucion por tipo de Sector
+### % ejecución por tipo de Sector
 
 ```{r}
 plot_ly(num_proy,labels=~tipo_sector,values=~Cantidad,type = "pie", hole=0.4 ) %>% 
@@ -189,15 +190,29 @@ barra_reg <- ggplot(sector_tipo, aes(x = gestion, y = ejec, fill = tipo_sector))
 ggplotly(barra_reg)
 ```
 
-### Area 
+### Área 
 
 ```{r}
 tendencia <- sector_tipo %>% 
+  group_by(tipo_sector,gestion) %>% 
+  summarise(presup = sum(presup),ejec = sum(ejec)) %>% 
   pivot_longer(cols = c(presup, ejec),
                names_to = "Tipo",
-               values_to = "Valor")
+               values_to = "Valor") %>% 
+  collect() %>%
+  mutate(
+    tipo_sector = as.factor(tipo_sector),
+    gestion = as.numeric(gestion),
+    Tipo = as.factor(Tipo),
+    Valor = as.numeric(Valor)
+  )
 
-tendencia_graf <- ggplot(tendencia, aes(x = gestion, y = Valor, color = Tipo, group = Tipo)) +
+tx <- highlight_key(tendencia)
+
+x <- filter_select("id", "-  Seleccione:", tx, ~tipo_sector, multiple = FALSE) 
+
+
+tendencia_graf <- ggplot(tx, aes(x = gestion, y = Valor, color = Tipo, group = Tipo)) +
   geom_line() +
   labs(title = "Gráfico de Tendencias Presupuesto vs Ejecución",
        x = "Gestión",
@@ -205,7 +220,8 @@ tendencia_graf <- ggplot(tendencia, aes(x = gestion, y = Valor, color = Tipo, gr
   scale_color_manual(values = c("presup" = "blue", "ejec" = "red")) +  # Cambiar colores si deseas
   theme_minimal()
 
-ggplotly(tendencia_graf)
+tendencia_grafP <- ggplotly(tendencia_graf) 
+bscols(x,tendencia_grafP,widths = c(3, 9))
 ```
 
 ### Tabla 
@@ -214,7 +230,7 @@ ggplotly(tendencia_graf)
 datatable(sector_tipo %>% collect())
 ```
 
-# Departamento {data-navmenu="Analisis" data-icon="fa-city"}
+# Departamento {data-navmenu="Análisis" data-icon="fa-city"}
 
 ```{r}
 departamento <- proy %>% 
@@ -225,7 +241,7 @@ departamento <- proy %>%
 Row {data-height=350}
 -----------------------------------------------------------------------
 
-### Numero de Proyectos por Departemento
+### Número de Proyectos por Departamento
 
 ```{r}
 bar<-ggplot(data=dep_n, aes(x=Departamento, y=Cantidad, fill=Departamento))+
@@ -237,7 +253,7 @@ ggplotly(bar) %>% layout(showlegend = FALSE)
 ```
 
 
-### % ejecucion por departamento
+### % ejecución por departamento
 
 ```{r}
 dep_pe <- departamento %>% 
@@ -274,20 +290,31 @@ bar_dep <- ggplot(dep_vs1, aes(x = depto, y = Monto, fill = Tipo))+
 ggplotly(bar_dep)
 ```
 
-### Area 
+### Área 
 
 ```{r}
 
-fig <- plot_ly(dep_vs, x = ~depto, y = ~Presupuestado, type = 'scatter', mode = 'lines', fill = 'tozeroy', name = 'Presupuestado',fillcolor = 'primary')
-fig <- fig %>% add_trace(y = ~Ejecutado, name = 'Ejecutado',fillcolor = 'danger')
+tendencia <- departamento %>% 
+  group_by(gestion,Departamento = depto) %>% 
+  summarise(Presupuestado = sum(presup),Ejecutado = sum(ejec)) %>% 
+  pivot_longer(cols = c(Presupuestado, Ejecutado),
+               names_to = "Tipo",
+               values_to = "Valor") %>% 
+  collect() %>%
+  mutate(
+    Departamento = as.factor(Departamento),
+    gestion = as.numeric(gestion),
+    Tipo = as.factor(Tipo),
+    Valor = as.numeric(Valor)
+  )
 
-fig <- fig %>% layout(
-  xaxis = list(title = 'Departamento'),
-  yaxis = list(title = 'Monto en millones de dolares'),
-  title = 'Comparación de presupuesto vs ejecutado por gestión'
-)
+tx <- highlight_key(tendencia)
 
-fig
+x <- filter_select("id", "-  Seleccione:", tx, ~Departamento, multiple = FALSE) 
+
+
+bar_dep <- plot_ly(tx, x = ~gestion, y = ~ Valor , type="bar" , mode="markers", fillcolor = ~ Tipo) 
+bscols(x,bar_dep,widths = c(3, 9))
 ```
 
 ### Tabla 
@@ -296,7 +323,7 @@ fig
 datatable(departamento %>% collect())
 ```
 
-# Region {data-navmenu="Analisis" data-icon="fa-map-marked"}
+# Región {data-navmenu="Análisis" data-icon="fa-map-marked"}
 
 ```{r}
 region_d <- proy %>% 
@@ -307,7 +334,7 @@ region_d <- proy %>%
 Row {data-height=350}
 -----------------------------------------------------------------------
 
-### Numero de Proyectos por region
+### Número de Proyectos por región
 
 ```{r}
 num_proy <- region_d %>% 
@@ -326,7 +353,7 @@ ggplotly(proy_reg)
 ```
 
 
-### % ejecucion por Region
+### % ejecución por Región
 
 ```{r}
 plot_ly(num_proy,labels=~Region,values=~Cantidad,type = "pie", hole=0.4 ) %>% 
@@ -367,7 +394,7 @@ ggplotly(area_reg)
 datatable(region_d %>% collect())
 ```
 
-# Tipo de entidad {data-navmenu="Analisis" data-icon="fa-suit-case"}
+# Tipo de entidad {data-navmenu="Análisis" data-icon="fa-suit-case"}
 
 ```{r}
 tipo_entidad_r <- proy %>% 
@@ -378,7 +405,7 @@ tipo_entidad_r <- proy %>%
 Row {data-height=350}
 -----------------------------------------------------------------------
 
-### Numero de Proyectos por tipo de entidad 
+### Número de Proyectos por tipo de entidad 
 
 ```{r}
 num_proy <- tipo_entidad_r %>% 
@@ -398,7 +425,7 @@ ggplotly(proy_reg) %>% layout(showlegend = FALSE)
 ```
 
 
-### % ejecucion por tipo de entidad
+### % ejecución por tipo de entidad
 
 ```{r}
 num_proy_1 <- num_proy %>% head(10)
@@ -440,7 +467,7 @@ ggplotly(area_reg)
 datatable(tipo_entidad_r %>% collect())
 ```
 
-# Financiamiento {data-navmenu="Analisis" data-icon="fa-money-bill-wave"}
+# Financiamiento {data-navmenu="Análisis" data-icon="fa-money-bill-wave"}
 
 ```{r}
 financiamiento <- proy %>% 
@@ -451,7 +478,7 @@ financiamiento <- proy %>%
 Row {data-height=350}
 -----------------------------------------------------------------------
 
-### Numero de Proyectos por financiamiento
+### Número de Proyectos por financiamiento
 
 ```{r}
 
@@ -490,7 +517,7 @@ ggplotly(proy_reg)
 ```
 
 
-### % ejecucion por financiamiento
+### % ejecución por financiamiento
 
 ```{r}
 plot_ly(num_proy,labels=~tipo_financiamiento,values=~Cantidad,type = "pie") %>% 
@@ -531,8 +558,21 @@ ggplotly(area_reg)
 datatable(financiamiento %>% collect())
 ```
 
-# Grafico Dinamico
+# Gráfico Dinámico
+
+### Gráfico por departamentos de cantidad de proyectos con filtro por año
+
 ```{r}
+tot_proy <- proy %>% count(gestion, depto) %>% rename(total=n) %>% collect()
+tot_proy$depto <- as.factor(tot_proy$depto)
+tot_proy$gestion <- as.numeric(tot_proy$gestion)
+tot_proy$total <- as.numeric(tot_proy$total)
+
+tx <- highlight_key(tot_proy)
+
+x <- filter_select("id", "-  Seleccione:", tx, ~gestion, multiple = FALSE)
+p <- plot_ly(tx, x = ~depto, y = ~ total , type="bar", fillcolor =  ~depto) # %>% add_markers() 
+bscols(x,p,widths = c(3, 9))
 
 ```
 
