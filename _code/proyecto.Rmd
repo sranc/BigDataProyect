@@ -290,7 +290,7 @@ bar_dep <- ggplot(dep_vs1, aes(x = depto, y = Monto, fill = Tipo))+
 ggplotly(bar_dep)
 ```
 
-### Área 
+### Tendencia 
 
 ```{r}
 
@@ -315,6 +315,21 @@ x <- filter_select("id", "-  Seleccione:", tx, ~Departamento, multiple = FALSE)
 
 bar_dep <- plot_ly(tx, x = ~gestion, y = ~ Valor , type="bar" , mode="markers", fillcolor = ~ Tipo) 
 bscols(x,bar_dep,widths = c(3, 9))
+```
+
+### total proyecto 
+
+```{r}
+tot_proy <- proy %>% count(gestion, depto) %>% rename(total=n) %>% collect()
+tot_proy$depto <- as.factor(tot_proy$depto)
+tot_proy$gestion <- as.numeric(tot_proy$gestion)
+tot_proy$total <- as.numeric(tot_proy$total)
+
+tx <- highlight_key(tot_proy)
+
+x <- filter_select("id", "-  Seleccione:", tx, ~gestion, multiple = FALSE)
+p <- plot_ly(tx, x = ~depto, y = ~ total , type="bar", fillcolor =  ~depto) # %>% add_markers() 
+bscols(x,p,widths = c(3, 9))
 ```
 
 ### Tabla 
@@ -377,15 +392,38 @@ barra_reg <- ggplot(region_d, aes(x = gestion, y = presup + ejec, fill = region)
 ggplotly(barra_reg)
 ```
 
-### Densidad 
+### Tendencia 
 
 ```{r}
-area_reg <- ggplot(region_d, aes(x = ejec)) +
-  geom_density(aes(fill = gestion), alpha = 0.5) +
-  labs(title = "Presupuesto y Ejecución por Región",
-       x = "Ejecución") +
+tendencia <- region_d %>% 
+  group_by(region,gestion) %>% 
+  summarise(presup = sum(presup),ejec = sum(ejec)) %>% 
+  pivot_longer(cols = c(presup, ejec),
+               names_to = "Tipo",
+               values_to = "Valor") %>% 
+  collect() %>%
+  mutate(
+    region = as.factor(region),
+    gestion = as.numeric(gestion),
+    Tipo = as.factor(Tipo),
+    Valor = as.numeric(Valor)
+  )
+
+tx <- highlight_key(tendencia)
+
+x <- filter_select("id", "-  Seleccione:", tx, ~region, multiple = FALSE) 
+
+
+tendencia_graf <- ggplot(tx, aes(x = gestion, y = Valor, color = Tipo, group = Tipo)) +
+  geom_line() +
+  labs(title = "Gráfico de Tendencias Presupuesto vs Ejecución",
+       x = "Gestión",
+       y = "Valor") +
+  scale_color_manual(values = c("presup" = "blue", "ejec" = "red")) +  # Cambiar colores si deseas
   theme_minimal()
-ggplotly(area_reg)
+
+tendencia_grafP <- ggplotly(tendencia_graf) 
+bscols(x,tendencia_grafP,widths = c(3, 9))
 ```
 
 ### Tabla 
@@ -394,7 +432,7 @@ ggplotly(area_reg)
 datatable(region_d %>% collect())
 ```
 
-# Tipo de entidad {data-navmenu="Análisis" data-icon="fa-suit-case"}
+# Tipo de entidad {data-navmenu="Análisis" data-icon="fa-chalkboard-teacher"}
 
 ```{r}
 tipo_entidad_r <- proy %>% 
@@ -450,15 +488,38 @@ barra_reg <- ggplot(tipo_entidad_r, aes(x = gestion, y = ejec, fill = tipo_entid
 ggplotly(barra_reg)
 ```
 
-### Densidad 
+### Tendencia 
 
 ```{r}
-area_reg <- ggplot(tipo_entidad_r, aes(x = ejec)) +
-  geom_density(aes(fill = tipo_entidad), alpha = 0.5) +
-  labs(title = "Ejecución por tipo de entidad",
-       x = "Ejecución") +
+tendencia <- proy %>% 
+  group_by(tipo_entidad,gestion) %>% 
+  summarise(presup = round(sum(presup,na.rm = TRUE),2),ejec = round(sum(presupuesto_ejecutado,na.rm = TRUE)),2) %>% 
+  pivot_longer(cols = c(presup, ejec),
+               names_to = "Tipo",
+               values_to = "Valor") %>% 
+  collect() %>%
+  mutate(
+    Entidad = as.factor(tipo_entidad),
+    gestion = as.numeric(gestion),
+    Tipo = as.factor(Tipo),
+    Valor = as.numeric(Valor)
+  )
+
+tx <- highlight_key(tendencia)
+
+x <- filter_select("id", "-  Seleccione:", tx, ~Entidad, multiple = FALSE) 
+
+
+tendencia_graf <- ggplot(tx, aes(x = gestion, y = Valor, color = Tipo, group = Tipo)) +
+  geom_line() +
+  labs(title = "Gráfico de Tendencias Presupuesto vs Ejecución",
+       x = "Gestión",
+       y = "Valor") +
+  scale_color_manual(values = c("presup" = "blue", "ejec" = "red")) +  # Cambiar colores si deseas
   theme_minimal()
-ggplotly(area_reg)
+
+tendencia_grafP <- ggplotly(tendencia_graf) 
+bscols(x,tendencia_grafP,widths = c(3, 9))
 ```
 
 ### Tabla 
@@ -541,15 +602,38 @@ barra_reg <- ggplot(financiamiento, aes(x = gestion, y = presup + ejec, fill = t
 ggplotly(barra_reg)
 ```
 
-### Densidad 
+### Tendencia 
 
 ```{r}
-area_reg <- ggplot(financiamiento, aes(x = ejec)) +
-  geom_density(aes(fill = tipo_financiamiento), alpha = 0.5) +
-  labs(title = "Presupuesto y Ejecución por financiamiento",
-       x = "Ejecución") +
+tendencia <- proy %>% 
+  group_by(tipo_financiamiento,gestion) %>% 
+  summarise(presup = round(sum(presup,na.rm = TRUE),2),ejec = round(sum(presupuesto_ejecutado,na.rm = TRUE)),2) %>% 
+  pivot_longer(cols = c(presup, ejec),
+               names_to = "Tipo",
+               values_to = "Valor") %>% 
+  collect() %>%
+  mutate(
+    Financiamiento = as.factor(tipo_financiamiento),
+    gestion = as.numeric(gestion),
+    Tipo = as.factor(Tipo),
+    Valor = as.numeric(Valor)
+  )
+
+tx <- highlight_key(tendencia)
+
+x <- filter_select("id", "-  Seleccione:", tx, ~Financiamiento, multiple = FALSE) 
+
+
+tendencia_graf <- ggplot(tx, aes(x = gestion, y = Valor, color = Tipo, group = Tipo)) +
+  geom_line() +
+  labs(title = "Gráfico de Tendencias Presupuesto vs Ejecución",
+       x = "Gestión",
+       y = "Valor") +
+  scale_color_manual(values = c("presup" = "blue", "ejec" = "red")) +  # Cambiar colores si deseas
   theme_minimal()
-ggplotly(area_reg)
+
+tendencia_grafP <- ggplotly(tendencia_graf) 
+bscols(x,tendencia_grafP,widths = c(3, 9))
 ```
 
 ### Tabla 
@@ -557,25 +641,6 @@ ggplotly(area_reg)
 ```{r}
 datatable(financiamiento %>% collect())
 ```
-
-# Gráfico Dinámico
-
-### Gráfico por departamentos de cantidad de proyectos con filtro por año
-
-```{r}
-tot_proy <- proy %>% count(gestion, depto) %>% rename(total=n) %>% collect()
-tot_proy$depto <- as.factor(tot_proy$depto)
-tot_proy$gestion <- as.numeric(tot_proy$gestion)
-tot_proy$total <- as.numeric(tot_proy$total)
-
-tx <- highlight_key(tot_proy)
-
-x <- filter_select("id", "-  Seleccione:", tx, ~gestion, multiple = FALSE)
-p <- plot_ly(tx, x = ~depto, y = ~ total , type="bar", fillcolor =  ~depto) # %>% add_markers() 
-bscols(x,p,widths = c(3, 9))
-
-```
-
 
 # Informe {data-icon="fa-file-alt"}
 
