@@ -313,8 +313,16 @@ tx <- highlight_key(tendencia)
 x <- filter_select("id", "-  Seleccione:", tx, ~Departamento, multiple = FALSE) 
 
 
-bar_dep <- plot_ly(tx, x = ~gestion, y = ~ Valor , type="bar" , mode="markers", fillcolor = ~ Tipo) 
-bscols(x,bar_dep,widths = c(3, 9))
+tendencia_graf <- ggplot(tx, aes(x = gestion, y = Valor, color = Tipo, group = Tipo)) +
+  geom_line() +
+  labs(title = "Gráfico de Tendencias Presupuesto vs Ejecución",
+       x = "Gestión",
+       y = "Valor") +
+  scale_color_manual(values = c("Presupuestado" = "blue", "Ejecutado" = "red")) +  # Cambiar colores si deseas
+  theme_minimal()
+
+tendencia_grafP <- ggplotly(tendencia_graf) 
+bscols(x,tendencia_grafP,widths = c(3, 9))
 ```
 
 ### total proyecto 
