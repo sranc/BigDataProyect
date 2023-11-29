@@ -137,7 +137,7 @@ plot_ly(dep_p,labels=~Departamento,values=~Porcentaje,type = "pie") %>%
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 ```
 
-# Sector {data-navmenu="Analisis" data-icon="fa-business-time"}
+# Sector {data-navmenu="Análisis" data-icon="fa-business-time"}
 
 ```{r}
 sector_tipo <- proy %>% 
@@ -207,7 +207,7 @@ ggplotly(area_reg)
 datatable(sector_tipo %>% collect())
 ```
 
-# Departamento {data-navmenu="Analisis" data-icon="fa-city"}
+# Departamento {data-navmenu="Análisis" data-icon="fa-city"}
 
 ```{r}
 departamento <- proy %>% 
@@ -443,7 +443,7 @@ ggplotly(area_reg)
 datatable(tipo_entidad_r %>% collect())
 ```
 
-# Financiamiento {data-navmenu="Analisis" data-icon="fa-money-bill-wave"}
+# Financiamiento {data-navmenu="Análisis" data-icon="fa-money-bill-wave"}
 
 ```{r}
 financiamiento <- proy %>% 
